@@ -33,3 +33,4 @@ clearvars -except corr_mat1;
 save('corr_mat1.mat');
 %%
 %include a function that checks through Parseval's Theorem
+%run this once.
