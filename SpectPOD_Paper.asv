@@ -3,13 +3,14 @@
 %Check if fft is applied properly. You can use cat to join data and check
 %with respect to that
 %Check what factor needs to be multiplied to ffts
-%Read documentation on fft routine in MATLAB
+%expand later for others.
 clear all;
 Nf = 386;
 n = Nf/2;
 Nb = 280; %hardcoded
-qj_bar_ens = zeros(6360,n,Nb);
-%change this address everytime you are in a local machine
+qj_bar_ens = zeros(6360,n,Nb);%not sure about its dimensions
+%add spect8_1.mat into your system
+%change this address ev
 load('\\citrixvdi.osg.ufl.edu\citrix-student$\UserData\surabhi123iit\Documents\Downloads\spect8_1.mat');
 for i = 1:100
     u_fluc_inst(:,:) = spect8fluc(:,3,((386*(i-1))+1):(386*i));
