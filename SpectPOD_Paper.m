@@ -58,8 +58,8 @@ clearvars spect8fluc;
 POD_spect_coeff = zeros(6360,Nb,n);%calculate size of this variable here
 eigen_val = zeros(Nb,Nb,n);
 for f = 1:n
-qj_bar_inst(:,:) = qj_bar_ens(:,1,:);
-qj_mat = (conj(qj_bar_inst))'*qj_bar_inst;
+qj_bar_inst(:,:) = qj_bar_ens(:,f,:);
+qj_mat = qj_bar_inst'*qj_bar_inst;
 [eigvec,eigval] = svd(qj_mat);
 eigen_val(:,:,f) = eigval;
 POD_spect_inst = qj_bar_inst*eigvec*1/sqrt(eigval);
