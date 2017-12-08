@@ -18,3 +18,12 @@ plot_strouhal(eigval);
 legend('Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3');
 pbaspect([1 1 1]);
 %%
+load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
+sum_eigval1 = sum(eig_val);
+sum_eigval2 = sum(sum_eigval1);
+eigval = eig_val(1:4,:)/sum_eigval2;
+eigval = eigval';
+plot_strouhal(eigval);
+legend('Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3');
+pbaspect([1 1 1]);
+%%
