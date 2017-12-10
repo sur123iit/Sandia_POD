@@ -9,8 +9,7 @@ plot(1:193,eigval2);
 %%
 clearvars eigval2
 %%
-
-%%
+%plot actual values
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
 eigval = eig_val(1:4,:);
 eigval = eigval';
@@ -18,6 +17,7 @@ plot_strouhal(eigval);
 legend('Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3');
 pbaspect([1 1 1]);
 %%
+%plot fraction values
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
 sum_eigval1 = sum(eig_val);
 sum_eigval2 = sum(sum_eigval1);

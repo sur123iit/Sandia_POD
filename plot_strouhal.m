@@ -4,7 +4,7 @@ function [ output_args ] = plot_strouhal( a )
 %  The format of the matrix should be:
 %-if it is 1 D, then, no problem.
 %-if it is 2 D, then, frequency distribution should be across each column.
-% n: number of plots to be on a plot
+% n: number of rossiter modes you wanna plot
 % o: 1 D or 2D
 Fs = input('Input the sampling frequency');
 n1 = input('Enter 1 if negative frequencies are also considered. Else enter 0');
@@ -39,9 +39,16 @@ for i = 1:N2
     
     hold on
 end
-ymax = input ('Enter the y limit value from graph');
-xmax = input ('Enter the x limit value from graph');
-plot([0.0598 0.0598],[0 ymax],'--',[0.14 0.14],[0 ymax],'--',[0.219 0.219],[0 ymax],'--')
+ymax = input ('Enter the y limit value from graph: ');
+xmax = input ('Enter the x limit value from graph: ');
+n = input('How many Rossiter mode frequencies you need to show in the curve: ');
+Ma = U/340;
+ros_mode = Ros_freq(Ma,n);
+ros_mode = ros_mode*D/U;
+for i = 1:n
+    plot([ros_mode(i,1) ros_mode(i,1)],[0 ymax],'--')
+    hold on
+end
 xlim([0 xmax]), ylim([0 ymax])
 end
 
