@@ -27,3 +27,6 @@ plot_strouhal(eigval);
 legend('Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3');
 pbaspect([1 1 1]);
 %%
+load('Vel_incrN.mat');
+u = vel_fluc(1,3,1:386);
+psd_u
