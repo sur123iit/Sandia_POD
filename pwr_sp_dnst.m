@@ -1,4 +1,4 @@
-function [osd_a,N1] = pwr_sp_dnst( a )
+function [osd_a] = pwr_sp_dnst( a )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 %   a should be a column vector, i.e. its form should be Nx1
