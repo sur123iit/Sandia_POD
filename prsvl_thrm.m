@@ -12,4 +12,3 @@ else
     res = 1;
 end
 end
-

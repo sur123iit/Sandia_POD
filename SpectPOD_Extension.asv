@@ -43,4 +43,3 @@ sum_eigval5 = en_cnvr_ary(sum_eigval3);
 plot(1:100,sum_eigval5(1:100,1),'o-');
 xlim([1 100]), ylim([0 1])
 xlabel('Mode number'), ylabel('Energy fraction')
-pbaspect([1 1 1]);

@@ -10,4 +10,3 @@ psd_a = 2*psd_a;
 psd_a = psd_a/(N1*Fs);
 osd_a(:,1) = psd_a(1:N1/2,1);
 end
-
