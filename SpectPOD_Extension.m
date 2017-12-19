@@ -33,14 +33,21 @@ load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
 sum_eigval1 = sum(eig_val);
 sum_eigval2 = sum(sum_eigval1);
 sum_eigval1 = sum_eigval1/sum_eigval2;
-plot_strouhal(sum_eigval1);
+plot_strouhal(sum_eigval1');
+xlabel('Strouhal Number','FontSize',25), ylabel('Energy fraction','FontSize',25)
+pbaspect([1 1 1]);
 %%
 %Energy Convergence Plots
+load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
 sum_eigval3 = sum(eig_val,2);
 sum_eigval4 = sum(sum_eigval3);
 sum_eigval3 = sum_eigval3/sum_eigval4;
 sum_eigval5 = en_cnvr_ary(sum_eigval3);
 plot(1:100,sum_eigval5(1:100,1),'o-');
 xlim([1 100]), ylim([0 1])
-xlabel('Mode number'), ylabel('Energy fraction')
+xlabel('Mode number','FontSize',25), ylabel('Energy fraction','FontSize',25)
 pbaspect([1 1 1]);
+hold on
+plot([25 25],[0 sum_eigval5(25,1)],'--');
+hold on
+plot([0 25],[sum_eigval5(25,1) sum_eigval5(25,1)],'--');
