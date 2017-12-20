@@ -19,7 +19,6 @@ for u = 1:I
 end
 fclose(datfile);
 %%
-% This section hasn't been run completely yet. Wait for compiler
 clear all;
 close all;
 clc;
@@ -46,9 +45,4 @@ tecio_path = strcat(tecplot_home,'tecutilinternal_tecio_exer.dll');
 tecio_header_path = strcat(tecplot_home,'\include\TECIO.h');
 
 if ~libisloaded('tecio')
-    [notfound,warnings] = loadlibrary(tecio_path, tecio_header_path, ...
-        'alias','tecio');
-end
-
-libfunctionsview('tecio')
-
+    [notfound,warnings
