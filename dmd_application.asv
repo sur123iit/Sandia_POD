@@ -3,12 +3,15 @@
 M = 386; % you need to automate this
 Ne =  280; % Number of blocks or ensembles
 Ng = 6360; % Number of gridpoints * flow variables
+%{
 Tx = eye(M-1);
 Ty = eye(M-1);
 cat_mat = zeros(1,M-1);
 Tx = vertcat(Tx,cat_mat);
 Ty = vertcat(cat_mat,Ty);
 clearvars cat_mat;
+%}
+
 x = zeros(Ng,M-1,Ne);
 y = zeros(Ng,M-1,Ne);
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\fill8ens1.mat');
