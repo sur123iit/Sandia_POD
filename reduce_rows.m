@@ -11,10 +11,10 @@ if n_rows > n1
 else
     txy = eye(n1-n_rows);
     cat_mat = zeros(n1-n_rows,n_rows);
-    if up_down == 1
+    if down_up == 1
        txy = horzcat(txy,cat_mat);
        reduced_array = txy*input_array;
-    elseif up_down == 2
+    elseif down_up == 2
        txy = horzcat(cat_mat,txy);
        reduced_array = txy*input_array;
     else
