@@ -10,21 +10,29 @@ plot(1:193,eigval2);
 clearvars eigval2
 %%
 %plot actual values
+close all;
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
 eigval = eig_val(1:4,:);
 eigval = eigval';
+eigval_t(:,1) = sum(eig_val,1);
+eigval = horzcat(eigval_t,eigval);
 plot_strouhal(eigval);
-legend('Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3');
+legend('Total','Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3','Rossiter Mode 4');
 pbaspect([1 1 1]);
 %%
 %plot fraction values for Mode 1, Mode 2 and Mode 3 vs frequency
+clear all;
+close all;
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
 sum_eigval1 = sum(eig_val);
 sum_eigval2 = sum(sum_eigval1);
 eigval = eig_val(1:4,:)/sum_eigval2;
 eigval = eigval';
+eigval_t(:,1) = sum(eig_val,1);
+eigval_t = eigval_t/sum_eigval2;
+eigval = horzcat(eigval_t,eigval);
 plot_strouhal(eigval);
-legend('Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3');
+legend('Total','Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3','Rossiter Mode 4');
 pbaspect([1 1 1]);
 
 %%
