@@ -1,5 +1,5 @@
 clear all;
-%% Pair generation using two different ensembles
+%% Exact dmd pairs
 ens_num = 1;
 folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach0.8\';
 fileName = strcat('ens_num_',int2str(ens_num),'.txt');
@@ -15,7 +15,7 @@ y = load(completeName);
 r = 386;
 ens_num = ens_num - 1;
 %% Perform Standard DMD (with rank reduction) (Taken from Rowley's github)
-[u, dmd_vec, dmd_evals] = std_dmd(x,y,r);
+[u, dmd_vec, dmd_evals] = exact_dmd(x,y,r);
 dmd_evals1 = diag(dmd_evals);
 real_evals = real(dmd_evals1);
 imag_evals = imag(dmd_evals1);
@@ -30,7 +30,7 @@ hold on;
 th = [0:.01:2*pi 0.01];
 plot(cos(th),sin(th),'k--');
 %% Saving this graph. Take care of the name that you give it
-name = strcat('dmd_cross_lambda_real_imag_ens_',int2str(ens_num-1));
+name = %based on ens_num
 fpath = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\graphs\';
 saveas(gca, fullfile(fpath, name),'png');
 save(strcat(fpath,name,'.mat'),'real_evals','imag_evals');
