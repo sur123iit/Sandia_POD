@@ -15,9 +15,9 @@ eigval = horzcat(eigval_t,eigval);
 plot_strouhal(eigval);
 pbaspect([1 1 1]);
 set(gca,'fontsize',15);
-xlabel('St_D','FontSize',28), ylabel('\eta','FontSize',28), xticks(0:0.1:0.5); yticks(0:0.02:0.1);
+xlabel('St_D','FontSize',28), ylabel('\eta_i','FontSize',28), xticks(0:0.1:0.5); yticks(0:0.02:0.1);
 set(gcf,'Position',[0 0 700 700])
-lgd = legend('Total','Mode 1','Mode 2','Mode 3','Mode 4','Rossiter Mode 1','Rossiter Mode 2','Rossiter Mode 3','Rossiter Mode 4');
+lgd = legend('\eta_t','\eta_1','\eta_2','\eta_3','\eta_4','RF_1','RF_2','RF_3','RF_4');
 lgd.FontSize = 12;
 %% Graph name: SpectralModes_vs_SnapshotModes.png
 %Description: Energy Comparison of SPOD vs POD vs Mode Number
@@ -73,6 +73,10 @@ eigval = eigval';
 eigval_t(:,1) = sum(eig_val,1);
 eigval_t = eigval_t/sum_eigval2;
 %
+eigval_1(:,1) = eigval(6,:)+eigval(7,:)+eigval(8,:);
+eigval_1t = eigval_t(6,1)+eigval_t(7,1)+eigval_t(8,1);
+eigval_1 = eigval_1/eigval_1t;
+%
 eigval_2(:,1) = eigval(14,:)+eigval(15,:)+eigval(16,:);
 eigval_2t = eigval_t(14,1)+eigval_t(15,1)+eigval_t(16,1);
 eigval_2 = eigval_2/eigval_2t;
@@ -86,28 +90,32 @@ eigval_4t = eigval_t(33,1)+eigval_t(34,1)+eigval_t(35,1);
 eigval_4 = eigval_4/eigval_4t;
 
 %
+eigval_1_conv = en_cnvr_ary(eigval_1);
 eigval_2_conv = en_cnvr_ary(eigval_2);
 eigval_3_conv = en_cnvr_ary(eigval_3);
 eigval_4_conv = en_cnvr_ary(eigval_4);
-plot(1:100, eigval_2_conv(1:100,1),'LineWidth',2,'Color','b') ,ylim([0 1]), xlim([1 100])
+plot(1:100, eigval_1_conv(1:100,1),'LineWidth',1,'Color','y') ,ylim([0 1]), xlim([1 100])
 hold on
-plot(1:100, eigval_3_conv(1:100,1),'LineWidth',2,'Color','r') ,ylim([0 1]), xlim([1 100])
-plot(1:100, eigval_4_conv(1:100,1),'LineWidth',2,'Color','g') ,ylim([0 1]), xlim([1 100])
-plot(1:100, sum_eigval5(1:100,1),'LineWidth',2,'Color','m') ,ylim([0 1]), xlim([1 100])
+plot(1:100, eigval_2_conv(1:100,1),'LineWidth',1,'Color','r') ,ylim([0 1]), xlim([1 100])
+plot(1:100, eigval_3_conv(1:100,1),'LineWidth',1,'Color','g') ,ylim([0 1]), xlim([1 100])
+plot(1:100, eigval_4_conv(1:100,1),'LineWidth',1,'Color','m') ,ylim([0 1]), xlim([1 100])
+plot(1:100, sum_eigval5(1:100,1),'LineWidth',2,'Color','b') ,ylim([0 1]), xlim([1 100])
 plot([25 25],[0 eigval_2_conv(25,1)],'--','LineWidth',2,'Color',[0.3 0.3 0.3])
-plot([0 25],[eigval_2_conv(25,1) eigval_2_conv(25,1)],'--','LineWidth',2,'Color',[0.3 0.3 0.3]);
-plot([0 25],[eigval_3_conv(25,1) eigval_3_conv(25,1)],'--','LineWidth',2,'Color',[0.3 0.3 0.3]);
-plot([0 25],[eigval_4_conv(25,1) eigval_4_conv(25,1)],'--','LineWidth',2,'Color',[0.3 0.3 0.3]);
+plot([0 25],[eigval_1_conv(25,1) eigval_1_conv(25,1)],'--','LineWidth',1,'Color',[0.3 0.3 0.3]);
+plot([0 25],[eigval_2_conv(25,1) eigval_2_conv(25,1)],'--','LineWidth',1,'Color',[0.3 0.3 0.3]);
+plot([0 25],[eigval_3_conv(25,1) eigval_3_conv(25,1)],'--','LineWidth',1,'Color',[0.3 0.3 0.3]);
+plot([0 25],[eigval_4_conv(25,1) eigval_4_conv(25,1)],'--','LineWidth',1,'Color',[0.3 0.3 0.3]);
 plot([0 25],[sum_eigval5(25,1) sum_eigval5(25,1)],'--','LineWidth',2,'Color',[0 0.3 0.3]);
-plot([1 5:5:100],[eigval_2_conv(1,1) eigval_2_conv(5:5:100,1)'],'o','MarkerSize',4,'MarkerFaceColor','b','MarkerEdgeColor','b')
-plot([1 5:5:100],[eigval_3_conv(1,1) eigval_3_conv(5:5:100,1)'],'o','MarkerSize',4,'MarkerFaceColor','r','MarkerEdgeColor','r')
-plot([1 5:5:100],[eigval_4_conv(1,1) eigval_4_conv(5:5:100,1)'],'o','MarkerSize',4,'MarkerFaceColor','g','MarkerEdgeColor','g')
-plot([1 5:5:100],[sum_eigval5(1,1) sum_eigval5(5:5:100,1)'],'o','MarkerSize',4,'MarkerFaceColor','m','MarkerEdgeColor','m')
+plot([1 5:5:100],[eigval_1_conv(1,1) eigval_1_conv(5:5:100,1)'],'o','MarkerSize',3,'MarkerFaceColor','y','MarkerEdgeColor','y')
+plot([1 5:5:100],[eigval_2_conv(1,1) eigval_2_conv(5:5:100,1)'],'o','MarkerSize',3,'MarkerFaceColor','r','MarkerEdgeColor','r')
+plot([1 5:5:100],[eigval_3_conv(1,1) eigval_3_conv(5:5:100,1)'],'o','MarkerSize',3,'MarkerFaceColor','g','MarkerEdgeColor','g')
+plot([1 5:5:100],[eigval_4_conv(1,1) eigval_4_conv(5:5:100,1)'],'o','MarkerSize',3,'MarkerFaceColor','m','MarkerEdgeColor','m')
+plot([1 5:5:100],[sum_eigval5(1,1) sum_eigval5(5:5:100,1)'],'o','MarkerSize',4,'MarkerFaceColor','b','MarkerEdgeColor','b')
 
 pbaspect([1 1 1]);
 set(gca,'fontsize',15);
-xlabel('Mode Number (i)','FontSize',28), ylabel('\eta','FontSize',28), 
-lgd = legend('Rossiter Mode 2','Rossiter Mode 3','Rossiter Mode 4','Total','Location','east');
+xlabel('Mode Number (i)','FontSize',28), ylabel('\eta_f','FontSize',28), 
+lgd = legend('\eta_R_F_1','\eta_R_F_2','\eta_R_F_3','\eta_R_F_4','\eta_T','Location','east');
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 700 700]),xticks(0:20:100); yticks(0:0.2:1);
 %% Graph Name: SpectralModes_vs_SnapshotModes_normalized.png

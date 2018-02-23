@@ -1,11 +1,7 @@
 %EXACT DMD APPLIED TO THE DATASETS BASED ON ALGORITHM 2 OF TU ET AL
 clear all;
 %% Load parameters
-Mach = 0.8;
-N = 386;
-D = 25.4*10^-3;
-L = 127*10^-3;
-Uinf = 272.23;
+[ L,D,Ma,Uinf,N,~] = load_parameters(1);
 %% Data collection
 ens_num = 1;
 folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach0.8\';
@@ -19,7 +15,7 @@ fileName = strcat('ens_num_',int2str(ens_num),'.txt');
 completeName = strcat(folderName,fileName);
 y = load(completeName);
 
-r = 386;
+r = N;
 
 %% Exact DMD Application
 [u, dmd_vec, dmd_evals, dmd_modes] = exact_dmd(x,y,r);
