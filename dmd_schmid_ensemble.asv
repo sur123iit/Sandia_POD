@@ -1,0 +1,26 @@
+%% Calculating the frequencies associated with the DMD of all ensembles
+clear all;
+%% Load parameters
+[ L,D,Mach,Uinf,N,Nb] = load_parameters(1);
+Fs = 37500;
+%% Extraction 1
+edges = -Fs/2-(Fs/(2*N)):Fs/N:(Fs/2)+(Fs/(2*N));
+sort_num_array = zeros(25,Nb);
+for ens_num = 1:Nb
+    folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach0.8\';
+    fileName = strcat('ens_num_',int2str(ens_num),'.txt');
+    completeName = strcat(folderName,fileName);
+    uv = load(completeName);
+    x = uv(:,1:385);
+    y = uv(:,2:386);
+    r = 25;
+    %Standard DMD
+    [u, dmd_vec, dmd_evals, dmd_modes] = std_dmd(x,y,r);
+    mode_frequencies = angle(dmd_evals)*37500/(2*pi);
+    [a_sorted,a_order] = sort(mode_frequencies);
+    %new_eigval = dmd_evals(a_order,1);
+    dmd_freq = mode_frequencies(a_order,1);
+    %new_dmd_modes(:,:) = dmd_modes(:,a_order);
+    sort_num_array(:,ens_num) = discretize(dmd_freq,edges);
+    clearvars uv x y new_dmd_modes dmd_freq
+end

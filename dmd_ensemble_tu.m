@@ -99,5 +99,3 @@ end
 for ii = 1:N+1
     avg_modes(:,ii) = avg_modes(:,ii)/norm(avg_modes(:,ii));
 end
-%%
-
