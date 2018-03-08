@@ -1,101 +1,83 @@
-%% Ensemble DMD based on Non Sequential Sampling, eqn 17 of Tu et al.
+%%
 clear all;
-%% Load parameters
-[L,D,Mach,Uinf,N,Nb] = load_parameters(1);
-Fs = 37500;
-del_t = 10.2*(10^-3)/386;
-%% ensemble dmd data save
-for ens_num = 1:280
-    %data collection
-    folderName = strcat('C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach',num2str(Mach),'\');
+%%
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+%%
+tic
+for ens_num = 51:60
+    folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach0.8\';
     fileName = strcat('ens_num_',int2str(ens_num),'.txt');
     completeName = strcat(folderName,fileName);
     uv = load(completeName);
-    x = reduce_cols(uv,1,1);
-    y = reduce_cols(uv,1,2);
-    %dmd application
-    [u, dmd_vec, dmd_evals,dmd_emodes] = std_dmd(x,y,N-1);
-    mode_frequencies = angle(dmd_evals)*Fs/(2*pi);
-    mode_growthrate = log(abs(dmd_evals))/del_t;
-    fName = strcat('C:\Users\surabhi123iit\Documents\MATLAB\Raw\dmd_ens\Mach',num2str(Mach),'\','ens_num_',int2str(ens_num),'.mat');
-    %sort 
-    [a_sorted,a_order] = sort(mode_frequencies);
-    dmd_eigval = dmd_evals(a_order,1);
-    dmd_freq = mode_frequencies(a_order,1);
-    dmd_modes(:,:) = dmd_emodes(:,a_order);
-    dmd_growth = mode_growthrate(a_order,1);
-    %save
-    save(fName,'dmd_freq','dmd_growth','dmd_eigval','dmd_modes');
+    x = uv(:,1:385);
+    y = uv(:,2:386);
+    if ens_num == 1
+        X = x;
+        Y = y;
+    else
+         X = cat(2,X,x);
+         Y = cat(2,Y,y);
+    end   
 end
-
-%% Plot curves
-%DMD spectra
-close all;
-for ens_num = 1:Nb
-fName = strcat('C:\Users\surabhi123iit\Documents\MATLAB\Raw\dmd_ens\Mach',num2str(Mach),'\','ens_num_',int2str(ens_num),'.mat');
-load(fName);
-ydmd = zeros(N-1,1);
-for ii = 1:N-1
-    ydmd(ii,1) = norm(dmd_modes(:,ii)).*abs(dmd_eigval(ii));
-end
-ydmd = ydmd./max(ydmd);
-plot(dmd_freq,ydmd,'*','Color','b')
-xlim([0 18750])
-hold on
-
-end
-%Eigen Value Circle
-%% Average modes
-edges = -Fs/2-(Fs/(2*N)):Fs/N:(Fs/2)+(Fs/(2*N));
-avg_modes = zeros(6360,N+1);
-for ens_num = 1:Nb
-    fName = strcat('C:\Users\surabhi123iit\Documents\MATLAB\Raw\dmd_ens\Mach',num2str(Mach),'\','ens_num_',int2str(ens_num),'.mat');
-    load(fName);   
-    sort_num = discretize(dmd_freq,edges);
-    for ii = 1:N-1
-    avg_modes(:,sort_num(ii,1)) = avg_modes(:,sort_num(ii,1)) + dmd_modes(:,ii);
-    end
-    clearvars dmd_freq dmd_growth dmd_eigval dmd_modes sort_num;
-end
-for ii = 1:N+1
-    avg_modes(:,ii) = avg_modes(:,ii)/norm(avg_modes(:,ii));
-end
+loop1 = toc
 %%
-avg_modes_reqd = avg_modes(:,194:386);
-close all;
-index_freq = 15 ;
-[x1,y1,Uphi,Vphi] = cont_plot_uv(abs(avg_modes_reqd(:,index_freq)));
-contourf(x1/D,y1/D,Uphi',100,'LineStyle','none');
+tic
+r = 100;
+[u, dmd_vec, dmd_evals, dmd_modes,mode_frequencies] = std_dmd(X,Y,r,Fs);
+[dmd_freq,dmd_eval,dmd_mode] = sort_dmd(mode_frequencies,dmd_evals,dmd_modes);
+loop2 = toc
+%% Plot eigen value circle
+real_evals = real(dmd_eval);
+imag_evals = imag(dmd_eval);
+plot(real_evals,imag_evals,'.'); xlim([-1.1 1.1]), ylim([-1.1 1.1])
 set(gca,'fontsize',15);
-xlabel('x/D','FontSize',25), ylabel('y/D','FontSize',25),
-colorbar
-axis equal
-set(gcf,'Position',[0 0 1200 400])
+pbaspect([1 1 1]), xlabel('Real(\lambda)','FontSize',28), ylabel('Imag(\lambda)','FontSize',28)
+set(gcf,'Position',[0 0 800 800])
+hold on;
+th = [0:.01:2*pi 0.01];
+plot(cos(th),sin(th),'k--');
+xticks(-1:0.25:1); yticks(-1:0.25:1);
 %%
-sort_num = discretize(tall_freq,edges);
-%
-edge
-load(fName);
-freq_bins = histogram(dmd_freq,386);
-histogram(dmd_freq,386);
-xlim([0 10^4])
-[Y,E] = discretize(dmd_freq,N);
-%test. Delete after you've understood
-edges = [-1 1 3 5 7 9 11];
-data = [0 2 4 6 8 10];
-disc_y = discretize(data,edges);
-%% Average modes - Alternative Method
+close all;
+plot(dmd_freq,abs(dmd_eval),'*');
+xlim([0 20000])
+%%
 edges = -Fs/2-(Fs/(2*N)):Fs/N:(Fs/2)+(Fs/(2*N));
-avg_modes = zeros(6360,N+1);
-for ens_num = 1:Nb
-    fName = strcat('C:\Users\surabhi123iit\Documents\MATLAB\Raw\dmd_ens\Mach',num2str(Mach),'\','ens_num_',int2str(ens_num),'.mat');
-    load(fName);   
-    sort_num = discretize(dmd_freq,edges);
-    for ii = 1:N-1
-    avg_modes(:,sort_num(ii,1)) = avg_modes(:,sort_num(ii,1)) + (dmd_modes(:,ii).*dmd_eigval(ii,1));
+disc_freq = discretize(dmd_freq,edges);
+num_fx = zeros(387,1);
+for fx = 1:387
+    for num_pdf = 1:r
+        if disc_freq(num_pdf,1) == fx
+            num_fx(fx,1) = num_fx(fx,1) + abs_eval(num_pdf,1);
+        end
     end
-    clearvars dmd_freq dmd_growth dmd_eigval dmd_modes sort_num;
+end  
+abs_eval = abs(dmd_eval);
+
+%%
+close all;
+for ii = 1:100
+    abs_eval(ii,1) = abs(dmd_eval(ii,1))*norm(dmd_mode(:,ii));
 end
-for ii = 1:N+1
-    avg_modes(:,ii) = avg_modes(:,ii)/norm(avg_modes(:,ii));
-end
+%%
+%abs_eval = abs(dmd_eval)*norm(dmd_mode);
+plot(dmd_freq*D/Uinf,abs_eval,'*');
+xlabel('St_D')
+hold on
+f_ros = Ros_freq(0.8,4,127*10^-3);
+f_ros = f_ros*D/Uinf;
+plot([f_ros(1,1) f_ros(1,1)],[0 1],'--',[f_ros(2,1) f_ros(2,1)],[0 1],'--',[f_ros(3,1) f_ros(3,1)],[0 1],'--',[f_ros(4,1) f_ros(4,1)],[0 1],'--')
+xlim([0 0.5])
+pbaspect([1 1 1])
+set(gca,'fontsize',15);
+xlabel('St_D','FontSize',28),ylabel('N','FontSize',28)
+set(gcf,'Position',[0 0 700 700])
+%%
+
+
+
+    
+    
+    
+    
+    

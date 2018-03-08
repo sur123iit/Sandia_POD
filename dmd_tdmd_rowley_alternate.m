@@ -1,4 +1,7 @@
 clear all;
+%% Load parameters
+[
+
 %% Exact dmd pairs
 ens_num = 1;
 folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach0.8\';
@@ -12,9 +15,9 @@ fileName = strcat('ens_num_',int2str(ens_num),'.txt');
 completeName = strcat(folderName,fileName);
 y = load(completeName);
 
-r = 386;
+r = N;
 ens_num = ens_num - 1;
-%% Perform Standard DMD (with rank reduction) (Taken from Rowley's github)
+%% Perform Exact DMD
 [u, dmd_vec, dmd_evals] = exact_dmd(x,y,r);
 dmd_evals1 = diag(dmd_evals);
 real_evals = real(dmd_evals1);

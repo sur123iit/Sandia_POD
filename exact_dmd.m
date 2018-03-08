@@ -8,7 +8,6 @@ Atilde = Qx' * y * V * pinv(S);
 [dmd_vec,dmd_evals_mat] = eig(Atilde);
 dmd_evals = diag(dmd_evals_mat);
 dmd_modes = y*V*pinv(S)*dmd_vec;
-for i = 1:r
-end
+
 end
 

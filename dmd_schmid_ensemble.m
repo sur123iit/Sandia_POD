@@ -1,8 +1,7 @@
 %% Calculating the frequencies associated with the DMD of all ensembles
 clear all;
 %% Load parameters
-[ L,D,Mach,Uinf,N,Nb] = load_parameters(1);
-Fs = 37500;
+[ L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 %% Extraction 1
 edges = -Fs/2-(Fs/(2*N)):Fs/N:(Fs/2)+(Fs/(2*N));
 num_array_pdf = zeros(Nb*25,1);
@@ -27,7 +26,7 @@ for ens_num = 1:Nb
     clearvars uv x y new_dmd_modes dmd_freq
 end
 %%
-clearvars -except sort_num_array
+
 %{
 num_array_pdf = zeros(25*280,1);
 for ens_num = 1:Nb
@@ -47,9 +46,20 @@ bar((Fs/N)*(D/Uinf):(Fs/N)*(D/Uinf):(Fs/2)*(D/Uinf),num_fx(195:387,1))
 xlabel('St_D')
 hold on
 f_ros = Ros_freq(0.8,4,127*10^-3);
-plot(f_ros*D/Uinf,[20 20 20 20],'*')
+plot(f_ros*D/Uinf,[180 180 180 180],'*')
 f_ros = f_ros*D/Uinf;
-plot([f_ros(1,1) f_ros(1,1)],[0 25],'--',[f_ros(2,1) f_ros(2,1)],[0 25],'--',[f_ros(3,1) f_ros(3,1)],[0 25],'--',[f_ros(4,1) f_ros(4,1)],[0 25],'--')
+plot([f_ros(1,1) f_ros(1,1)],[0 200],'--',[f_ros(2,1) f_ros(2,1)],[0 200],'--',[f_ros(3,1) f_ros(3,1)],[0 200],'--',[f_ros(4,1) f_ros(4,1)],[0 200],'--')
+xlim([0 0.5])
+pbaspect([1 1 1])
+set(gca,'fontsize',15);
+xlabel('St_D','FontSize',28),ylabel('N','FontSize',28)
+set(gcf,'Position',[0 0 700 700])
+%% Comparison
+num_fx_sum = sum(num_fx);
+num_fx_1 = num_fx/num_fx_sum;
+close all;
+plot((Fs/N)*(D/Uinf):(Fs/N)*(D/Uinf):(Fs/2)*(D/Uinf),num_fx_1(195:387,1))
+% Compare with Spectral POD eigen curve
 xlim([0 0.5])
 pbaspect([1 1 1])
 set(gca,'fontsize',15);

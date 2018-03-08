@@ -1,7 +1,7 @@
 %EXACT DMD APPLIED TO THE DATASETS BASED ON ALGORITHM 2 OF TU ET AL
 clear all;
 %% Load parameters
-[ L,D,Ma,Uinf,N,~] = load_parameters(1);
+[ L,D,Ma,Uinf,Fs,N,Nb] = load_parameters(1);
 %% Data collection
 ens_num = 1;
 folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach0.8\';
@@ -20,30 +20,16 @@ r = N;
 %% Exact DMD Application
 [u, dmd_vec, dmd_evals, dmd_modes] = exact_dmd(x,y,r);
 for ii = 1:386
-    dmd_modes(:,ii) = dmd_modes(:,ii)/dmd_evals(ii,ii);
+    dmd_modes(:,ii) = dmd_modes(:,ii)/dmd_evals(ii,1);
 end
-dmd_evals1 = diag(dmd_evals);
 %% Frequency and Growth Rate
-mode_frequencies = angle(dmd_evals1)*37500/(2*pi);
-%%
+mode_frequencies = angle(dmd_evals)*37500/(2*pi);
+%% Sort according to frequency
 [a_sorted,a_order] = sort(mode_frequencies);
 new_eigval = dmd_evals1(a_order,1);
 new_freq = mode_frequencies(a_order,1);
 new_dmd_modes(:,:) = dmd_modes(:,a_order);
 plot(1:386,new_freq);
-%%
-for ii = 1:385
-    del_f(ii,1) = new_freq(ii+1,1) - new_freq(ii,1);
-end
-freq_rossiter = Ros_freq(0.8,5,127*10^-3);
-for ii = 1:386
-    if new_freq(ii,1)>freq_rossiter(3,1)
-        disp(ii);
-        break;
-    end
-end
-%%
-D = 25.4*10^-3;
 
 %% Contour plot
 %new_freq(197,1)

@@ -1,11 +1,8 @@
 %% THIS CONTAINS THINGS THAT ARE YET TO BE RESOLVED
 
 %% Calculate frequency, growth rate and some other parameters required for plotting - WHAT IS THE GROWTH RATE HERE?
-del_t = 10.2*(10^-3)/386;
 mode_growthrate = log(abs(dmd_evals1))/del_t; %CHECK!!
 dmd_amps_norm = abs(dmd_amps); %CHECK!!
-x_max = max(mode_frequencies);
-fact_str = D/Uinf;
 dmd_amps = pinv(dmd_modes)*x(:,1); %CHECK!!
 %% Sort
 [a_sorted,a_order] = sort(mode_frequencies);
@@ -43,11 +40,7 @@ xlabel('St','FontSize',25), ylabel('Modal Amplitude','FontSize',25),
 set(gcf,'Position',[0 0 800 800])
 xlim([0 0.8]);
 ylim([0 ymax]);
-%% Save this plot
-name = '' ;
-fpath = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\graphs\';
-saveas(gca, fullfile(fpath, name),'png');
-save(strcat(fpath,name,'.mat'),'mode_frequencies','dmd_amps_norm','rfreq','fact_xmax','fact_str','xmax','ymax');
+
 %% Plot amp_norm vs mode_growthrate
 close all;
 plot(mode_growthrate,dmd_amps_norm,'*');
@@ -130,18 +123,3 @@ xlabel('St_D','FontSize',25), ylabel('y_d_m_d','FontSize',25),
 set(gcf,'Position',[0 0 800 800])
 xlim([0 0.8]);
 ylim([0 1.01]);
-%% Find indices near Rossiter frequencies
-for ii = 1:385
-    if mode_frequencies(ii,1) > 2310 && mode_frequencies(ii,1) < 2380
-        disp(ii);
-    end
-end
-
-%% Find indices for lower and higher ydmd
-
-for ii = 1:385
-    if ydmd(ii) >0.998
-        disp(ii);
-    end
-end
-%%

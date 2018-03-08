@@ -18,7 +18,7 @@ for i = 1:100
     clearvars u_fluc_inst v_fluc_inst;
     qj_bar = fft(qj');
     clear qj;
-    qj_bar_t = qj_bar';-
+    qj_bar_t = qj_bar';
     clearvars qj_bar;
     qj_bar_ens(:,:,i) = qj_bar_t(:,1:193);
     clearvars qj_bar_t;
