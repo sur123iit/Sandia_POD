@@ -1,7 +1,6 @@
 clear all;
 %% Load parameters
-[
-
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 %% Exact dmd pairs
 ens_num = 1;
 folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\vel_ens\Mach0.8\';

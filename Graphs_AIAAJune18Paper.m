@@ -155,22 +155,19 @@ close all;
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Cont_plot_SPOD_AIAA.mat');
 %2 6 9: indices
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-index_freq = 9;
+index_freq = 2;
 index_mode = 3;
 [x1,y1,Uphi,Vphi] = cont_plot_uv(real(cont_plot_mat(:,index_mode,index_freq)));
-%Decide if you want Uphi or Vphi and use it till the next percentage sign
-l1 = abs(max(max(Uphi)));
-l2 = abs(min(min(Uphi)));
-contourf(x1/D,y1/D,Uphi',100,'LineStyle','none');
-%See l1 and l2 and use the larger one for caxis limits
-caxis([-l1 l1]);
+%l1 = abs(max(max(Uphi))); %Vphi or Uphi
+%l2 = abs(min(min(Uphi))); %Vphi or Uphi
+%contourf(x1/D,y1/D,Uphi',100,'LineStyle','none'); %Vphi or Uphi
+%caxis([-l1 l1]);%pick l1 or l2 (larger of the two)
 colormap(redblue)
+%colorbar % depending on location
 set(gca,'FontSize',20,'FontWeight','Bold');
-%Decide the location of the image wrt the paper and choose labels
-xlabel('x/D','FontSize',40,'FontWeight','Bold'), 
-ylabel('y/D','FontSize',40,'FontWeight','Bold'),
+%xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
+%ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
 axis equal
-%Change 400 to 420 if x/D is not fitting
-set(gcf,'Position',[0 0 1200 400]), 
+%set(gcf,'Position',[0 0 1200 420]), %depending on location (400 or 420) 
 xticks(0:1:5), yticks(-0.5:0.5:0.5)
 %%

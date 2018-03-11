@@ -2,7 +2,6 @@
 clear all;
 %% Data collection
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-del_t = 10.2*(10^-3)/386;
 %% Ensemble DMD
 edges = -Fs/2-(Fs/(2*N)):Fs/N:(Fs/2)+(Fs/(2*N));
 r = input('Define a rank here');

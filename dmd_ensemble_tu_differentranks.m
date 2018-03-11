@@ -12,7 +12,7 @@ toc
 %% Rank = 19250
 clearvars -except Qx S V X Y
 r = 19250;
-Qx1 = Qx(:,1:r);
+Qx1 = Qx(:,1:r); %calculate it from the Ensemble POD vs Time Resoved POD
 S1 = S(1:r,1:r);
 V1 = V(:,1:r);
 Atilde = Qx1' * Y * V1 * pinv(S1);
