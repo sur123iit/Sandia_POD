@@ -1,3 +1,6 @@
+%%
+clear all;
+%%
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\EODMar1_ens60_tu_xy.mat');
 %% svd for 40 blocks
 tic
@@ -118,13 +121,18 @@ set(gca,'fontsize',15);
 xlabel('St_D','FontSize',28),ylabel('N','FontSize',28)
 set(gcf,'Position',[0 0 700 700])
 %%
-index_freq = 84;%Rf 1 233
+index_freq = 67;%Rf 1 233
 %index_freq = 147; ;%Rf 2
 %index_freq = 159;% 84; %Rf3 158 159
 [x1,y1,Uphi,Vphi] = cont_plot_uv(real(dmd_mode(:,index_freq)));
-contourf(x1/D,y1/D,Uphi',100,'LineStyle','none');
-set(gca,'fontsize',15);
-xlabel('x/D','FontSize',25), ylabel('y/D','FontSize',25),
-colorbar
+contourf(x1/D,y1/D,Vphi',100,'LineStyle','none');
+set(gca,'fontsize',20,'FontWeight','Bold');
+xlabel('x/D','FontSize',40), ylabel('y/D','FontSize',40),
+colormap(redblue)
+l1 = abs(max(max(Vphi))); %Vphi or Uphi
+l2 = abs(min(min(Vphi))); %Vphi or Uphi
+%contourf(x1/D,y1/D,Uphi',100,'LineStyle','none'); %Vphi or Uphi
+caxis([-l2 l2]);%pick l1 or l2 (larger of the two)
 axis equal
-set(gcf,'Position',[0 0 1200 400])
+set(gcf,'Position',[0 0 1200 420])
+xticks(0:1:5), yticks(-0.5:0.5:0.5)

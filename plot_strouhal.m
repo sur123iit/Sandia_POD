@@ -18,20 +18,24 @@ St = f*D/U;
 St1 = Fs*D/(2*U);
 for i = 1:N2
     if i == 1
-        plot(0:St:St1-St,a(1:N1,i),'o-')
-        %plot(0:St:St1-St,a(1:N1,i),'o-','LineWidth',2)
+        %plot(0:St:St1-St,a(1:N1,i),'o-')
+        plot(0:St:St1-St,a(1:N1,i),'o-','LineWidth',3)
     end
     if i == 2
-        plot(0:St:St1-St,a(1:N1,i),'s-')
+        %plot(0:St:St1-St,a(1:N1,i),'s-')
+        plot(0:St:St1-St,a(1:N1,i),'s-','LineWidth',2)
     end
     if i == 3
-        plot(0:St:St1-St,a(1:N1,i),'^-')
+        %plot(0:St:St1-St,a(1:N1,i),'^-')
+        plot(0:St:St1-St,a(1:N1,i),'^-','LineWidth',2)
     end
     if i == 4
-        plot(0:St:St1-St,a(1:N1,i),'>-')
+        %plot(0:St:St1-St,a(1:N1,i),'>-')
+        plot(0:St:St1-St,a(1:N1,i),'>-','LineWidth',2)
     end
     if i == 5
-        plot(0:St:St1-St,a(1:N1,i),'<-')
+        %plot(0:St:St1-St,a(1:N1,i),'<-')
+        plot(0:St:St1-St,a(1:N1,i),'<-','LineWidth',2)
     end
     if i == 6
         plot(0:St:St1-St,a(1:N1,i),'p-')
@@ -46,7 +50,7 @@ Ma = U/340;
 ros_mode = Ros_freq(Ma,n,L);
 ros_mode = ros_mode*D/U;
 for i = 1:n
-    plot([ros_mode(i,1) ros_mode(i,1)],[0 ymax],'--')
+    plot([ros_mode(i,1) ros_mode(i,1)],[0 ymax],'--','LineWidth',2)
     hold on
 end
 xlim([0 xmax]), ylim([0 ymax])
