@@ -39,5 +39,8 @@ colorbar;
 set(gcf,'Position',[0 0 800 800])
 xticks(0:20:100), yticks(0:20:100)
 %%
-
+clearvars vel_fluc;
+load('Y:\rawdata\Sandia_cavity\Vel_incrN.mat');
+clearvars vel_mat vel
+%%
 
