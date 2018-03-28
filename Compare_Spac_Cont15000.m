@@ -27,3 +27,17 @@ vel_fluc3 = uv(:,1:Ns3);
 Phi_dot = dot(Phi2(:,1:200),Phi3(:,1:200));
 plot(1:40,abs(Phi_dot(1:40)),'o-');
 %%
+grid_mat = (Phi3(:,1:200))'*(Phi2(:,1:200));
+grid_mat = abs(grid_mat);
+c = gray(30);
+c = flipud(c);
+colormap(c);
+h = pcolor(grid_mat(1:100,1:100));
+caxis([0 1]);
+pbaspect([1 1 1])
+colorbar;
+set(gcf,'Position',[0 0 800 800])
+xticks(0:20:100), yticks(0:20:100)
+%%
+
+
