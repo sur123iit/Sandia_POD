@@ -4,7 +4,7 @@ clear all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 %% Ensemble POD
 %% Load Data 
-folderName = strcat('C:\Users\surabhi123iit\Documents\MATLAB\Raw\ensemble_POD\Mach',num2str(Mach),'\');
+folderName = strcat('Z:\rawdata\Sandia_cavity\Denoise velocity data\ensemble_POD\Mach',num2str(Mach),'\');
 fileName = 'vel_fluc.txt';
 completeName = strcat(folderName,fileName);
 uv_ens = load(completeName);
@@ -18,6 +18,7 @@ vel_fluc2 = uv_ens(:,1:Ns2);
 %% Dot product plot
 Phi_dot = dot(Phi1(:,1:200),Phi2(:,1:200));
 plot(1:100,abs(Phi_dot(1:100)));
+xlim([0 40]), ylim([0 1]);
 %% Grid Matrix
 grid_mat = (Phi_tr(:,1:200))'*(Phi_ens(:,1:200));
 grid_mat = abs(grid_mat);
