@@ -27,4 +27,3 @@ vel_fluc3 = uv(:,1:Ns3);
 Phi_dot = dot(Phi2(:,1:200),Phi3(:,1:200));
 plot(1:40,abs(Phi_dot(1:40)),'o-');
 %%
-
