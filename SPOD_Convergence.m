@@ -10,5 +10,4 @@ for ens_num = 1:R
     fileName = strcat('ens_num_',int2str(ens_num),'.txt');
     completeName = strcat(folderName,fileName);
     uv = load(completeName);
-    
 end

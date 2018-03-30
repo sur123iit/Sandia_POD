@@ -49,7 +49,7 @@ vel_fluc4 = vertcat(u3,v3);
 %%
 [eigvec4, eigval4, PODcoeff4, Phi4] = POD_Snapshot(vel_fluc4);
 %%
-grid_mat = (Phi3(:,1:200))'*(Phi4(:,1:200));
+grid_mat = (Phi3(:,1:200))'*(Phi2(:,1:200));
 grid_mat = abs(grid_mat);
 c = gray(30);
 c = flipud(c);

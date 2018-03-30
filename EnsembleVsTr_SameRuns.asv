@@ -1,0 +1,17 @@
+%% This program compares the ensemble and time resolved modes achieved from the same number of runs
+%% Saving the quantities 
+clear all;
+%%
+uv_tr = load('Y:\rawdata\Sandia_cavity\Denoise velocity data\tr_POD\Mach0.8\vel_fluc.txt');
+Ns_tr = 19300;
+vel_fluc_tr = uv(:,1:Ns_tr);
+[eigvec_tr, eigval_tr, PODcoeff_tr, Phi_tr] = POD_Snapshot(vel_fluc_tr);
+%%
+uv_ens = load('Y:\rawdata\Sandia_cavity\Denoise velocity data\ensemble_POD\Mach0.8\vel_fluc.txt');
+Ns_ens = 1150;
+vel_fluc_ens = uv(:,1:Ns_ens);
+[eigvec_ens, eigval_ens, PODcoeff_ens, Phi_ens] = POD_Snapshot(vel_fluc_ens);
+%%
+grid_matrix =  (Phi_tr(:,1:200))'*(Phi_ens(:,1:200));
+%%
+save('Y:\rawdata\Sandia_cavity\ConvergencePhi\Phi_tr_runs_50.txt','Phi3','-ascii');
