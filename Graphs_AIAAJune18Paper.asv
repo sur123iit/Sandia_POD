@@ -201,15 +201,5 @@ xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location
 %ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
 set(gcf,'Position',[0 0 1200 420])
 xticks(0:1:5), yticks(-0.5:0.5:0.5)
-%% Ensemble POD modes folder
-clear all;
-close all;
-path = 'C:\Users\surabhi123iit\Dropbox (UFL)\Spring 2018\Spring 2018 documents\Spring 2018 weekly updates\AIAA paper final documents\Images\Ensemble POD modal shapes\';
-[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-folderName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\';
-fileName = 'Phi_ens_280.txt';
-completeName = strcat(folderName,fileName);
 %% 
-
-
 
