@@ -3,7 +3,7 @@ clear all;
 %%
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 %%
-r = 250;
+r = 280;
 folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi_';
 fileName = strcat(int2str(r),'.mat');
 completeName = strcat(folderName,fileName);
