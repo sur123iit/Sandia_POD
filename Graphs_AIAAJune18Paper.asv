@@ -201,5 +201,153 @@ xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location
 %ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
 set(gcf,'Position',[0 0 1200 420])
 xticks(0:1:5), yticks(-0.5:0.5:0.5)
+%% Ensemble POD modes folder
+clear all;
+close all;
+%path = 'C:\Users\surabhi123iit\Dropbox (UFL)\Spring 2018\Spring 2018 documents\Spring 2018 weekly updates\AIAA paper final documents\Images\Ensemble POD modal shapes\';
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\';
+fileName = 'Phi_ens_280.txt';
+completeName = strcat(folderName,fileName);
+Phi = load(completeName);
+m = 9;%CHANGE
+Phim = Phi(:,m);
+[x1,y1,Uphi,Vphi] = cont_plot_uv(Phim);
+Phi_viz = Vphi;%CHANGE
+l1 = abs(max(max(Phi_viz))); %Vphi or Uphi
+l2 = abs(min(min(Phi_viz))); %Vphi or Uphi
+l = max(l1,l2);
+contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
+set(gca,'FontSize',20,'FontWeight','Bold','LineWidth',2);
+caxis([-l l]);
+colormap(redblue)
+%colorbar % depending on location
+axis equal
+xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
+%ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
+set(gcf,'Position',[0 0 1200 420])
+xticks(0:1:5), yticks(-0.5:0.5:0.5)
 %% 
+%% Time Resolved POD modes folder
+clear all;
+close all;
+%path = 'C:\Users\surabhi123iit\Dropbox (UFL)\Spring 2018\Spring 2018 documents\Spring 2018 weekly updates\AIAA paper final documents\Images\Ensemble POD modal shapes\';
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\';
+fileName = 'Phi_ens_280.txt';
+completeName = strcat(folderName,fileName);
+Phi = load(completeName);
+m = 9;%CHANGE
+Phim = Phi(:,m);
+[x1,y1,Uphi,Vphi] = cont_plot_uv(Phim);
+Phi_viz = Vphi;%CHANGE
+l1 = abs(max(max(Phi_viz))); %Vphi or Uphi
+l2 = abs(min(min(Phi_viz))); %Vphi or Uphi
+l = max(l1,l2);
+contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
+set(gca,'FontSize',20,'FontWeight','Bold','LineWidth',2);
+caxis([-l l]);
+colormap(redblue)
+%colorbar % depending on location
+axis equal
+xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
+%ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
+set(gcf,'Position',[0 0 1200 420])
+xticks(0:1:5), yticks(-0.5:0.5:0.5)
+%% Convergence of POD modes
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
 
+r = 70;
+fileName = strcat('Phi_tr_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_tr = load(completeName);
+r = 6000;
+fileName = strcat('Phi_trN_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_ens = load(completeName);
+
+dot_Phi = dot(Phi_tr,Phi_ens);
+dot_Phi = abs(dot_Phi);
+
+plot(1:100,dot_Phi(1:100),'^-','LineWIdth',2);
+hold on
+
+clearvars Phi_ens;
+
+r = 6000;
+fileName = strcat('Phi_ensN_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_ens = load(completeName);
+dot_Phi = dot(Phi_tr,Phi_ens);
+dot_Phi = abs(dot_Phi);
+
+plot(1:100,dot_Phi(1:100),'o-','LineWidth',2);
+xlim([1 25]), ylim([0 1]);
+
+pbaspect([1 1 1]);
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_i . \Phi_j>','FontSize',34), xticks(0:5:25), yticks(0:0.2:1);
+lgd = legend('Time Resolved', 'Ensemble');
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+%% Grid plot TrEns70 vs TrN6000
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+
+r = 70;
+fileName = strcat('Phi_tr_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_tr = load(completeName);
+r = 6000;
+fileName = strcat('Phi_trN_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_ens = load(completeName);
+
+grid_mat = Phi_tr'*Phi_ens;
+grid_mat = abs(grid_mat);
+c = gray(10);
+c = flipud(c);
+colormap(c);
+h = pcolor(grid_mat(1:40,1:40));
+caxis([0 1]);
+pbaspect([1 1 1])
+%colorbar;
+xticks(0:10:40), yticks(0:10:40);
+set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
+set(gcf,'Position',[0 0 800 800])
+xlabel('Time Resolved(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);
+%% Grid plot TrEns70 vs EnsN6000
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+
+r = 70;
+fileName = strcat('Phi_tr_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_tr = load(completeName);
+r = 6000;
+fileName = strcat('Phi_ensN_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_ens = load(completeName);
+
+grid_mat = Phi_tr'*Phi_ens;
+grid_mat = abs(grid_mat);
+c = gray(10);
+c = flipud(c);
+colormap(c);
+h = pcolor(grid_mat(1:40,1:40));
+caxis([0 1]);
+pbaspect([1 1 1])
+c = colorbar;
+c.LineWidth = 2;
+xticks(0:10:40), yticks(0:10:40);
+set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
+set(gcf,'Position',[0 0 840 800])
+xlabel('Time Resolved(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);
+%% Convergence with number of snapshots
