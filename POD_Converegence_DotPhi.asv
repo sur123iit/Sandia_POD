@@ -1,0 +1,39 @@
+%%
+clear all;
+%%
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+%%
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+%%
+for r = 2000:500:5500
+    fileName = strcat('Phi_ensN_',int2str(r),'.txt');
+    completeName = strcat(folderName,fileName);
+    Phi_tr = load(completeName);
+    
+    fileName = strcat('Phi_ensN_',int2str(r+500),'.txt');
+    completeName = strcat(folderName,fileName);
+    Phi_ens = load(completeName);
+
+end
+
+
+grid_mat = Phi_tr'*Phi_ens;
+grid_mat = abs(grid_mat);
+c = gray(10);
+c = flipud(c);
+colormap(c);
+h = pcolor(grid_mat(1:40,1:40));
+caxis([0 1]);
+pbaspect([1 1 1])
+colorbar;
+set(gcf,'Position',[0 0 800 800])
+xticks(0:20:100), yticks(0:20:100)
+xlabel('Ensemble (4000 snapshots)'), ylabel('Time Resolved (15000 snapshots)');
+%%
+
+r = 6000;
+fileName = strcat('Phi_ensN_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_ens = load(completeName);
+dot_Phi = dot(Phi_tr,Phi_ens);
+dot_Phi = abs(dot_Phi);

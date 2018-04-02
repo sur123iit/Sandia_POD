@@ -346,10 +346,8 @@ caxis([0 1]);
 pbaspect([1 1 1])
 c = colorbar;
 c.LineWidth = 2;
-c.Ticks = 0:0.2:1.0;
 xticks(0:10:40), yticks(0:10:40);
 set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
-set(gcf,'Position',[0 0 880 880])
+set(gcf,'Position',[0 0 840 800])
 xlabel('Time Resolved(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);
 %% Convergence with number of snapshots
-
