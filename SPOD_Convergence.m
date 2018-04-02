@@ -30,7 +30,7 @@ clearvars POD_spect_inst;
 clearvars qj_mat qj_bar_inst;
 end
 %% Save data
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults_Mach0.6\';
 fileName = strcat('eigval_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'eigen_val','-ascii');
