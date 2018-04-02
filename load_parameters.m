@@ -22,7 +22,7 @@ elseif proj_num == 2
     Ma = 0.6;
     Uinf = 272.23;
     N = 386;
-    Nb = 280;
+    Nb = 260;
     Fs = 37500;
 elseif proj_num == 2
     L = 127*10^-3;

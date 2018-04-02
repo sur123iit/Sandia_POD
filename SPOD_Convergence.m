@@ -1,10 +1,10 @@
 %%
 clear all;
 %% Loading flow parameters
-[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(2);
 %% Loading Data for Spectral POD based on runs
 %Define the type of convergence
-for r = 10:10:280
+for r = 10:10:Nb
 folderName = strcat('Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach',num2str(Mach),'\');
 for ens_num = r-9:r
     fileName = strcat('ens_num_',int2str(ens_num),'.txt');
