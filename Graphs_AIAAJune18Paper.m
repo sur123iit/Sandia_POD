@@ -332,7 +332,6 @@ fileName = strcat('Phi_tr_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 Phi_tr = load(completeName);
 r = 6000;
-fileName = strcat('Phi_ensN_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 Phi_ens = load(completeName);
 
@@ -349,7 +348,4 @@ c.LineWidth = 2;
 c.Ticks = 0:0.2:1.0;
 xticks(0:10:40), yticks(0:10:40);
 set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
-set(gcf,'Position',[0 0 880 880])
-xlabel('Time Resolved(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);
 %% Convergence with number of snapshots
-
