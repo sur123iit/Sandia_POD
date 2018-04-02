@@ -3,23 +3,40 @@ clear all;
 %%
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 %%
-r = 250;
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi_';
-fileName = strcat(int2str(r),'.mat');
-completeName = strcat(folderName,fileName);
-load(completeName);
-Phi1(:,:) = Phi(:,1,:);
-clearvars Phi;
+for r = 50:50:200
+    folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi_';
+    fileName = strcat(int2str(r),'.mat');
+    completeName = strcat(folderName,fileName);
+    load(completeName);
+    Phi1(:,:) = Phi(:,1,:);
+    Phi2(:,:) = Phi(:,2,:);
+    Phi3(:,:) = Phi(:,3,:);
+    clearvars Phi;
+    folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi_';
+    fileName = strcat(int2str(r),'.mat');
+    completeName = strcat(folderName,fileName);
+    load(completeName);
+    Phi11(:,:) = Phi(:,1,:);
+    Phi21(:,:) = Phi(:,2,:);
+    Phi31(:,:) = Phi(:,3,:);
+    clearvars Phi;
+    Phi_dot1 = dot(Phi1,Phi11);
+    Phi_dot2 = dot(Phi2,Phi21);
+    Phi_dot3 = dot(Phi3,Phi31);
+    Dot1 = abs(Phi_dot1);
+    Dot2 = abs(Phi_dot2);
+Dot3 = abs(Phi_dot3);
+Dot1 = Dot1';
+Dot2 = Dot2';
+Dot3 = Dot3';
+
+end
 %%
-r = 200;
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi_';
-fileName = strcat(int2str(r),'.mat');
-completeName = strcat(folderName,fileName);
-load(completeName);
-Phi2(:,:) = Phi(:,1,:);
-clearvars Phi;
+
 %%
-Phi_dot = dot(Phi1,Phi2);
-plot(1:193,abs(Phi_dot),'o-');
-hold on
+
+
 %%
+legend('1','2','3');
+Phi_dot = horzcat(Dot1,Dot2,Dot3);
+save('Y:\rawdata\Sandia_cavity\SPODConvergencePlots\Mach0.8\Phi_dot_Mode123_280230.mat');
