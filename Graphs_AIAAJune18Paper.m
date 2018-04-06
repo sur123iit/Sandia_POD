@@ -332,6 +332,7 @@ fileName = strcat('Phi_tr_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 Phi_tr = load(completeName);
 r = 6000;
+fileName = strcat('Phi_ensN_',int2str(r),'.txt');%Change this!
 completeName = strcat(folderName,fileName);
 Phi_ens = load(completeName);
 
@@ -343,9 +344,15 @@ colormap(c);
 h = pcolor(grid_mat(1:40,1:40));
 caxis([0 1]);
 pbaspect([1 1 1])
+%{
 c = colorbar;
 c.LineWidth = 2;
 c.Ticks = 0:0.2:1.0;
+%}
 xticks(0:10:40), yticks(0:10:40);
 set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
+set(gcf,'Position',[0 0 800 800])
+xlabel('Ensemble(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);%Change this!
 %% Convergence with number of snapshots
+folderName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\'
+fileName = 
