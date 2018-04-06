@@ -29,9 +29,7 @@ sum_eigval4 = sum(sum_eigval3);
 sum_eigval3 = sum_eigval3/sum_eigval4;
 sum_eigval5 = en_cnvr_ary(sum_eigval3);
 clearvars -except sum_eigval5;
-
 %
-
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Vel_spacN.mat');
 clearvars vel_mat vel_mean;
 c1(:,:) = vel_fluc(:,3,:);
@@ -264,6 +262,16 @@ r = 70;
 fileName = strcat('Phi_tr_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 Phi_tr = load(completeName);
+
+r = 6000;
+fileName = strcat('Phi_ensN_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_ens = load(completeName);
+dot_Phi = dot(Phi_tr,Phi_ens);
+dot_Phi = abs(dot_Phi);
+clearvars Phi_ens;
+plot(1:100,dot_Phi(1:100),'o-','LineWidth',2);
+hold on
 r = 6000;
 fileName = strcat('Phi_trN_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
@@ -273,24 +281,13 @@ dot_Phi = dot(Phi_tr,Phi_ens);
 dot_Phi = abs(dot_Phi);
 
 plot(1:100,dot_Phi(1:100),'^-','LineWIdth',2);
-hold on
 
-clearvars Phi_ens;
-
-r = 6000;
-fileName = strcat('Phi_ensN_',int2str(r),'.txt');
-completeName = strcat(folderName,fileName);
-Phi_ens = load(completeName);
-dot_Phi = dot(Phi_tr,Phi_ens);
-dot_Phi = abs(dot_Phi);
-
-plot(1:100,dot_Phi(1:100),'o-','LineWidth',2);
-xlim([1 25]), ylim([0 1]);
+xlim([1 25]), ylim([0 1.1]);
 
 pbaspect([1 1 1]);
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
 xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_i . \Phi_j>','FontSize',34), xticks(0:5:25), yticks(0:0.2:1);
-lgd = legend('Time Resolved', 'Ensemble');
+lgd = legend('Ensemble POD (N = 6000)', 'Time Resolved POD (N = 6000)');
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 %% Grid plot TrEns70 vs TrN6000
@@ -353,6 +350,170 @@ xticks(0:10:40), yticks(0:10:40);
 set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
 set(gcf,'Position',[0 0 800 800])
 xlabel('Ensemble(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);%Change this!
-%% Convergence with number of snapshots
-folderName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\'
-fileName = 
+%% SPOD Convergence vs Frequency (For mode 1,2 and 3 separately)
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\SPODConvergencePlots\Mach',num2str(Mach),'\')
+m = 3;
+counter = 0;
+for r = 50:50:200
+    counter = counter + 1;
+fileName = strcat('Phi_dot_Mode123_',int2str(r),'_',int2str(r+50),'.txt');
+    completeName = strcat(folderName,fileName);
+    Dot_Phi = load(completeName);
+    Phi(:,counter) = Dot_Phi(:,m);
+end
+plot_strouhal(Phi);
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+set(gcf,'Position',[0 0 800 800])
+xlabel('St_D','FontSize',34), ylabel('<\Phi_r_1 . \Phi_r_2>','FontSize',34);%Change this!
+lgd = legend('50-100','100-150','150-200','200-250','RF1','RF2','RF3','RF4','Location','East')
+lgd.FontSize = 12;
+xticks(0:0.25:0.5), yticks(0:0.5:1.0)
+%% POD Convergence with runs
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+r = [4000 4500 5500];
+for ii = 1:3
+fileName = strcat('Phi_trN_',int2str(r(ii)),'.txt');
+completeName = strcat(folderName,fileName);
+Phi1 = load(completeName);
+fileName = strcat('Phi_trN_',int2str(r(ii)+500),'.txt');
+completeName = strcat(folderName,fileName);
+Phi2 = load(completeName);
+dot_Phi = abs(dot(Phi1,Phi2));
+if ii == 3
+    plot(1:200,dot_Phi,'o-','LineWidth',3,'Color',[0 0 1]);
+    plot([23 23],[0 dot_Phi(23)],'--','LineWidth',2);
+elseif ii == 2
+    plot(1:200,dot_Phi,'s-','LineWidth',2);
+else
+    plot(1:200,dot_Phi,'^-','LineWidth',2);
+end
+hold on
+clearvars Phi1 Phi2 dot_Phi;
+end
+xlim([1 30]), ylim([0 1.2]),xticks(0:10:30),yticks(0:0.25:1.0)
+lgd = legend('4000-4500','4500-5000','5500-6000','Location','NorthEast')
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+pbaspect([1 1 1])
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_N_1 . \Phi_N_2>','FontSize',34), 
+%% POD Convergence with runs
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+r = [3500 4500 5000]
+for ii = 1:3
+fileName = strcat('Phi_ensN_',int2str(r(ii)),'.txt');
+completeName = strcat(folderName,fileName);
+Phi1 = load(completeName);
+fileName = strcat('Phi_ensN_',int2str(r(ii)+500),'.txt');
+completeName = strcat(folderName,fileName);
+Phi2 = load(completeName);
+dot_Phi = abs(dot(Phi1,Phi2));
+if ii == 3
+    plot(1:200,dot_Phi,'o-','LineWidth',3,'Color',[0 0 1]);
+    plot([51 51],[0 dot_Phi(51)],'--','LineWidth',2);
+elseif ii == 2
+    plot(1:200,dot_Phi,'s-','LineWidth',2);
+else
+    plot(1:200,dot_Phi,'^-','LineWidth',2);
+end
+hold on
+clearvars Phi1 Phi2 dot_Phi;
+end
+xlim([1 60]), ylim([0 1.2]), xticks(0:20:60), yticks([0:0.25:1.0])
+lgd = legend('3500-4000','4500-5000','5000-5500','Location','NorthEast')
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+pbaspect([1 1 1])
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_N_1 . \Phi_N_2>','FontSize',34), 
+%% POD convergence with Runs based on energy (Ensemble) % DO IT PROPERLY
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+r = [500 1000 1500 2000 2500 3000 3500 4000];
+for ii = 1:8
+fileName = strcat('eigval_ensN_',int2str(r(ii)),'.txt');
+completeName = strcat(folderName,fileName);
+eig1 = load(completeName);
+eig2 = en_convergence(eig1);
+plot(1:200,eig2);
+hold on
+clearvars eig1 eig2;
+end
+xlim([1 60]), ylim([0 1.1]), xticks(0:20:60), yticks([0:0.25:1.0])
+lgd = legend('2000','4000','6000','Location','NorthEast')
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+pbaspect([1 1 1])
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_N_1 . \Phi_N_2>','FontSize',34),
+%% POD Energy Convergence 70 runs vs Ensemble and Time Resolved
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\');
+fileName = 'eigval_tr_70.txt';
+completeName = strcat(folderName,fileName);
+eig1 = load(completeName);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\');
+fileName = 'eigval_trN_6000.txt';
+completeName = strcat(folderName,fileName);
+eig2 = load(completeName);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\');
+fileName = 'eigval_ensN_6000.txt';
+completeName = strcat(folderName,fileName);
+eig3 = load(completeName);
+loglog(1:100,eig1(1:100),'o-',1:100,eig3(1:100),'s-',1:100,eig2(1:100),'^-','LineWidth',2);
+xlim([1 25]), ylim([0 0.2]);
+pbaspect([1 1 1])
+%xticks(0:5:25), yticks(0:0.04:0.2)
+set(gcf,'Position',[0 0 800 800])
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
+lgd = legend('Snapshot POD (70 runs)','Ensemble POD (N = 6000)','Time Resolved POD (N = 6000)');
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+%% Convergence of modes based on energy
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = 'Y:\rawdata\Sandia_cavity\SPODConvergencePlots\Mach0.8\';
+r = 200;
+fileName = strcat('PhiDot_DecrEn_',int2str(r),'_',int2str(r+50),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_dot = load(completeName);
+fig = figure;
+left_color = [0.3 0.3 0];
+right_color = [.41 .31 .54];
+set(fig,'defaultAxesColorOrder',[left_color; right_color]);
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+yyaxis left
+plot(1:500,Phi_dot,'o-','LineWidth',2,'Color',left_color);
+ylim([0 1.01]); yticks(0:0.2:1.0);
+ylabel('<\Phi_r_1 . \Phi_r_2>','FontSize',34), 
+clearvars Phi_dot
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\';
+fileName = 'eigval_280.txt';
+completeName = strcat(folderName,fileName);
+eig1 = load(completeName);
+eig2 = reshape(eig1,[size(eig1,1)*size(eig1,2),1]);
+eig3 = sort(eig2,'desc');
+eig3 = eig3/sum(eig3);
+yyaxis right
+bar(eig3(1:500),'FaceColor',right_color)
+xlim([1 200]), ylim([0 0.05]),
+xticks(0:50:200), yticks(0:0.01:0.05)
+xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
+set(gcf,'Position',[0 0 900 800])
+pbaspect([1 1 1])
+
