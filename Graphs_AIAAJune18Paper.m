@@ -348,6 +348,11 @@ set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
 <<<<<<< HEAD
 set(gcf,'Position',[0 0 800 800])
 xlabel('Ensemble(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);%Change this!
+<<<<<<< HEAD
+%% Convergence with number of snapshots
+folderName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\'
+fileName = 
+=======
 %% SPOD Convergence vs Frequency (For mode 1,2 and 3 separately)
 clear all;
 close all;
@@ -456,7 +461,7 @@ lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
 xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34),
-%% POD convergence with Runs based on energy (Ensemble) % DO IT PROPERLY
+%% POD convergence with Runs based on energy (Ensemble) 
 clear all;
 close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
@@ -537,6 +542,7 @@ xticks(0:50:200), yticks(0:0.01:0.05)
 xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
 set(gcf,'Position',[0 0 900 800])
 pbaspect([1 1 1])
+<<<<<<< HEAD
 %% Convergence with number of snapshots
 clear all;
 close all;
@@ -557,3 +563,7 @@ xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34),
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
 %% 
+=======
+
+>>>>>>> 129484c2e5c353bc55a9704e3f10c83e2d50a4c8
+>>>>>>> 7d1040d218d890c11c5ee7adf5f921e6c96125cf

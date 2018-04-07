@@ -29,7 +29,9 @@ sum_eigval4 = sum(sum_eigval3);
 sum_eigval3 = sum_eigval3/sum_eigval4;
 sum_eigval5 = en_cnvr_ary(sum_eigval3);
 clearvars -except sum_eigval5;
+
 %
+
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Vel_spacN.mat');
 clearvars vel_mat vel_mean;
 c1(:,:) = vel_fluc(:,3,:);
@@ -262,16 +264,6 @@ r = 70;
 fileName = strcat('Phi_tr_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 Phi_tr = load(completeName);
-
-r = 6000;
-fileName = strcat('Phi_ensN_',int2str(r),'.txt');
-completeName = strcat(folderName,fileName);
-Phi_ens = load(completeName);
-dot_Phi = dot(Phi_tr,Phi_ens);
-dot_Phi = abs(dot_Phi);
-clearvars Phi_ens;
-plot(1:100,dot_Phi(1:100),'o-','LineWidth',2);
-hold on
 r = 6000;
 fileName = strcat('Phi_trN_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
@@ -281,13 +273,24 @@ dot_Phi = dot(Phi_tr,Phi_ens);
 dot_Phi = abs(dot_Phi);
 
 plot(1:100,dot_Phi(1:100),'^-','LineWIdth',2);
+hold on
 
-xlim([1 25]), ylim([0 1.1]);
+clearvars Phi_ens;
+
+r = 6000;
+fileName = strcat('Phi_ensN_',int2str(r),'.txt');
+completeName = strcat(folderName,fileName);
+Phi_ens = load(completeName);
+dot_Phi = dot(Phi_tr,Phi_ens);
+dot_Phi = abs(dot_Phi);
+
+plot(1:100,dot_Phi(1:100),'o-','LineWidth',2);
+xlim([1 25]), ylim([0 1]);
 
 pbaspect([1 1 1]);
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
 xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_i . \Phi_j>','FontSize',34), xticks(0:5:25), yticks(0:0.2:1);
-lgd = legend('Ensemble POD (N = 6000)', 'Time Resolved POD (N = 6000)');
+lgd = legend('Time Resolved', 'Ensemble');
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 %% Grid plot TrEns70 vs TrN6000
@@ -329,6 +332,10 @@ fileName = strcat('Phi_tr_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 Phi_tr = load(completeName);
 r = 6000;
+<<<<<<< HEAD
+=======
+fileName = strcat('Phi_ensN_',int2str(r),'.txt');
+>>>>>>> 7d1040d218d890c11c5ee7adf5f921e6c96125cf
 completeName = strcat(folderName,fileName);
 Phi_ens = load(completeName);
 
@@ -342,6 +349,7 @@ caxis([0 1]);
 pbaspect([1 1 1])
 c = colorbar;
 c.LineWidth = 2;
+<<<<<<< HEAD
 c.Ticks = 0:0.2:1.0;
 xticks(0:10:40), yticks(0:10:40);
 set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
@@ -535,3 +543,10 @@ xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34),
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
 %% 
+=======
+xticks(0:10:40), yticks(0:10:40);
+set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
+set(gcf,'Position',[0 0 840 800])
+xlabel('Time Resolved(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);
+%% Convergence with number of snapshots
+>>>>>>> 7d1040d218d890c11c5ee7adf5f921e6c96125cf
