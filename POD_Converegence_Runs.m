@@ -1,12 +1,12 @@
 %%
 clear all;
 %%
-[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(2);
 %%
-r = 80;
+r = 10;
 %%
 folderName = strcat('Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_ens\Mach',num2str(Mach),'\');
-for ens_num =  71:r
+for ens_num =  1:r
     fileName = strcat('ens_num_',int2str(ens_num),'.txt');
     completeName = strcat(folderName,fileName);
     uv_tr = load(completeName);
