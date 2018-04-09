@@ -24,8 +24,5 @@ for ii = 1:50
     Phi_en(:,ii) = Phi(:,m_ind(ii),f_ind(ii));
 end
 %%
-fileName = 'Phi_DecrEn.mat';
-completeName = strcat(folderName,fileName);
-save(completeName,'Phi_en');
-%%
+save('Phi_DecrEn
 
