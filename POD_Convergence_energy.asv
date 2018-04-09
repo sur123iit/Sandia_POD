@@ -17,14 +17,13 @@ clear all;
 %%
 uv = load('Y:\rawdata\Sandia_cavity\Denoise velocity data\ensemble_POD\Mach0.8\vel_fluc.txt');
 %%
-r = 1500;
+r = 500;
 v_fluc = uv(:,1:r);
 [~, eigval, ~, ~] = POD_Snapshot(v_fluc);
 eigval = eigval/sum(eigval);
-eig1 = eigval(1:200);
+eig1 = eig
 folderName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\';
 fileName = strcat('eigval_ensN_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
-save(completeName,'eig1','-ascii');
+save(completeName,'eigval','-ascii');
 %%
-clearvars v_fluc eigval eig1;

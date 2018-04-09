@@ -329,7 +329,6 @@ fileName = strcat('Phi_tr_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 Phi_tr = load(completeName);
 r = 6000;
-fileName = strcat('Phi_ensN_',int2str(r),'.txt');%Change this!
 completeName = strcat(folderName,fileName);
 Phi_ens = load(completeName);
 
@@ -341,13 +340,12 @@ colormap(c);
 h = pcolor(grid_mat(1:40,1:40));
 caxis([0 1]);
 pbaspect([1 1 1])
-%{
 c = colorbar;
 c.LineWidth = 2;
 c.Ticks = 0:0.2:1.0;
-%}
 xticks(0:10:40), yticks(0:10:40);
 set(gca,'fontsize',17,'FontWeight','Bold','LineWidth',2);
+<<<<<<< HEAD
 set(gcf,'Position',[0 0 800 800])
 xlabel('Ensemble(6000 snapshots)','FontSize',31), ylabel('Time Resolved (70 runs)','FontSize',31);%Change this!
 <<<<<<< HEAD
@@ -446,22 +444,45 @@ close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
 r = [500 1000 1500 2000 2500 3000 3500 4000];
-for ii = 1:8
-fileName = strcat('eigval_ensN_',int2str(r(ii)),'.txt');
+for ii = 1:4
+fileName = strcat('eigval_trN_',int2str(r(ii)),'.txt');
 completeName = strcat(folderName,fileName);
 eig1 = load(completeName);
-eig2 = en_convergence(eig1);
-plot(1:200,eig2);
+eig2 = eig1/sum(eig1);
+eig3 = en_convergence(eig2);
+plot(1:200,eig3(1:200),'LineWidth',2);
 hold on
 clearvars eig1 eig2;
 end
-xlim([1 60]), ylim([0 1.1]), xticks(0:20:60), yticks([0:0.25:1.0])
-lgd = legend('2000','4000','6000','Location','NorthEast')
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlim([1 100]), ylim([0 1.15]), xticks(0:20:100), yticks([0:0.25:1.0])
+lgd = legend('500','1000','1500','2000','Location','NorthEast')
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
+xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34),
+%% POD convergence with Runs based on energy (Ensemble) 
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+r = [500 1000 1500 2000 2500 3000 3500 4000];
+for ii = 1:4
+fileName = strcat('eigval_ensN_',int2str(r(ii)),'.txt');
+completeName = strcat(folderName,fileName);
+eig1 = load(completeName);
+eig3 = en_convergence(eig1);
+plot(1:200,eig3(1:200),'LineWidth',2);
+hold on
+clearvars eig1 eig2;
+end
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
-xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_N_1 . \Phi_N_2>','FontSize',34),
+xlim([1 100]), ylim([0 1.15]), xticks(0:20:100), yticks([0:0.25:1.0])
+lgd = legend('500','1000','1500','2000','Location','NorthEast')
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+pbaspect([1 1 1])
+xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34),
 %% POD Energy Convergence 70 runs vs Ensemble and Time Resolved
 clear all;
 close all;
@@ -521,5 +542,28 @@ xticks(0:50:200), yticks(0:0.01:0.05)
 xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
 set(gcf,'Position',[0 0 900 800])
 pbaspect([1 1 1])
+<<<<<<< HEAD
+%% Convergence with number of snapshots
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\';
+fileName = 'eigval_280.txt';
+completeName = strcat(folderName,fileName);
+eig1 = load(completeName);
+eig2 = reshape(eig1,[size(eig1,1)*size(eig1,2),1]);
+eig3 = sort(eig2,'desc');
+eig3 = eig3/sum(eig3);
+eig4 = en_convergence(eig3);
+plot(1:200,eig4(1:200),'LineWidth',2);
+xlim([1 200]), ylim([0 1])
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xticks(0:50:200),yticks(0:0.25:1.0)
+xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
+set(gcf,'Position',[0 0 800 800])
+pbaspect([1 1 1])
+%% 
+=======
 
 >>>>>>> 129484c2e5c353bc55a9704e3f10c83e2d50a4c8
+>>>>>>> 7d1040d218d890c11c5ee7adf5f921e6c96125cf
