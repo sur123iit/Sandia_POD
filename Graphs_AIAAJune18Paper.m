@@ -111,6 +111,7 @@ lgd = legend('\eta_R_F_1','\eta_R_F_2','\eta_R_F_3','\eta_R_F_4','\eta_T','Locat
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800]),xticks(0:20:100); yticks(0:0.2:1);
 %% Graph Name: SpectralModes_vs_SnapshotModes_normalized.png
+%{ 
 clear all;
 close all;
 load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Spect_eigval.mat');
@@ -140,6 +141,7 @@ xlabel('Mode Fraction (i/N)','FontSize',34), ylabel('Energy Fraction (\eta)','Fo
 lgd = legend('Spectral','Snapshot','Location','east');
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
+%}
 %% Contour Plots SPOD folder
 %Check if Cont_plot_SPOD_AIAA.mat is there in Raw folder or not
 clear all;
@@ -562,8 +564,27 @@ xticks(0:50:200),yticks(0:0.25:1.0)
 xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
-%% 
-=======
-
->>>>>>> 129484c2e5c353bc55a9704e3f10c83e2d50a4c8
->>>>>>> 7d1040d218d890c11c5ee7adf5f921e6c96125cf
+%% Spectral POD decreasing energy convergence
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults';
+fileName = 'Phi_DecrEn.mat';
+completeName = strcat(folderName,fileName);
+load(completeName);
+[x1,y1,Uphi,Vphi] = cont_plot_uv(real(Phi_en(:,index_plot)));
+l1 = abs(max(max(Uphi))); %Vphi or Uphi
+l2 = abs(min(min(Uphi))); %Vphi or Uphi
+l = max(l1,l2);
+contourf(x1/D,y1/D,Uphi',100,'LineStyle','none'); %Vphi or Uphi
+caxis([-l l]);%pick l1 or l2 (larger of the two)
+colormap(redblue)
+ % depending on location
+set(gca,'FontSize',20,'FontWeight','Bold','LineWidth',2);
+%h = colorbar;
+%set(h,'LineWidth',2);
+xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
+%ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
+axis equal
+set(gcf,'Position',[0 0 1200 420]), %depending on location (400 or 420) 
+%xticks(0:1:5), yticks(-0.5:0.5:0.5)
