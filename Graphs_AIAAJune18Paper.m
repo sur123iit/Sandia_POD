@@ -413,7 +413,7 @@ clear all;
 close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
-r = [3500 4500 5000]
+r = [3500 4500 5000];
 for ii = 1:3
 fileName = strcat('Phi_ensN_',int2str(r(ii)),'.txt');
 completeName = strcat(folderName,fileName);
@@ -439,7 +439,7 @@ lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
-xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_N_1 . \Phi_N_2>','FontSize',34), 
+xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_i^N^1 . \Phi_i^N^2>','FontSize',34), 
 %% POD convergence with Runs based on energy (Ensemble) % DO IT PROPERLY
 clear all;
 close all;
@@ -572,12 +572,14 @@ folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\';
 fileName = 'Phi_DecrEn.mat';
 completeName = strcat(folderName,fileName);
 load(completeName);
-index_plot = 1;
+folderName = 'C:\Users\surabhi123iit\Dropbox (UFL)\Spring 2018\Spring 2018 documents\Spring 2018 weekly updates\Meeting Documents and Graphs\Meeting\SPOD_ContPlot_DecrEn\';
+for index_plot = 1:50
 [x1,y1,Uphi,Vphi] = cont_plot_uv(real(Phi_en(:,index_plot)));
-l1 = abs(max(max(Uphi))); %Vphi or Uphi
-l2 = abs(min(min(Uphi))); %Vphi or Uphi
+Phi_viz = Uphi;
+l1 = abs(max(max(Phi_viz))); %Vphi or Uphi
+l2 = abs(min(min(Phi_viz))); %Vphi or Uphi
 l = max(l1,l2);
-contourf(x1/D,y1/D,Uphi',100,'LineStyle','none'); %Vphi or Uphi
+contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
 caxis([-l l]);%pick l1 or l2 (larger of the two)
 colormap(redblue)
  % depending on location
@@ -585,7 +587,11 @@ set(gca,'FontSize',20,'FontWeight','Bold','LineWidth',2);
 %h = colorbar;
 %set(h,'LineWidth',2);
 xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
-%ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
+ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
 axis equal
 set(gcf,'Position',[0 0 1200 420]), %depending on location (400 or 420) 
-%xticks(0:1:5), yticks(-0.5:0.5:0.5)
+xticks(0:1:5), yticks(-0.5:0.5:0.5);
+fileName = strcat('Uphi_en_',int2str(index_plot));
+completeName =  strcat(folderName,fileName);
+saveas(gca,completeName,'png')
+end
