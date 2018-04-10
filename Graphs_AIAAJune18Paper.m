@@ -568,10 +568,11 @@ pbaspect([1 1 1])
 clear all;
 close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults';
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\';
 fileName = 'Phi_DecrEn.mat';
 completeName = strcat(folderName,fileName);
 load(completeName);
+index_plot = 1;
 [x1,y1,Uphi,Vphi] = cont_plot_uv(real(Phi_en(:,index_plot)));
 l1 = abs(max(max(Uphi))); %Vphi or Uphi
 l2 = abs(min(min(Uphi))); %Vphi or Uphi
