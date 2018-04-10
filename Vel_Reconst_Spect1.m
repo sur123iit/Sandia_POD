@@ -8,7 +8,7 @@ fileName = 'Phi_280.mat';
 completeName = strcat(folderName,fileName);
 load(completeName);
 %%
-for r = 11:15
+for r = 16:15
 clearvars -except Phi r
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach0.8\';
