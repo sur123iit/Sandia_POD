@@ -19,7 +19,7 @@ cmin2 = min(min(uv));
 folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityAnimations\';
 fileName = strcat('Uphi_',int2str(r),'.avi');
 completeName = strcat(folderName,fileName);
-v = VideoWriter('Vphi4.avi');
+v = VideoWriter(completeName);
 open(v);
 for k = 1:386  
 [x1,y1,Uphi,Vphi] = cont_plot_uv(uv_t(:,k));
@@ -38,7 +38,7 @@ xlim([min(x1/D)-0.1 max(x1/D)+0.1]), ylim([min(y1/D)-0.05 max(y1/D)+0.05])
 %set(gcf,'Position',[0 0 1200 400])
 xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
 ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
-xticks(0:1:5), yticks(-0.5:0.5:0.5)
+%xticks(0:1:5), yticks(-0.5:0.5:0.5)
 [x1,y1,Uphi,Vphi] = cont_plot_uv(uv(:,k));
 Phi_viz = Uphi;
 subplot(2,1,2)
@@ -55,7 +55,7 @@ xlim([min(x1/D)-0.1 max(x1/D)+0.1]), ylim([min(y1/D)-0.05 max(y1/D)+0.05])
 %set(gcf,'Position',[0 0 1200 400])
 xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
 ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
-xticks(0:1:5), yticks(-0.5:0.5:0.5)
+%xticks(0:1:5), yticks(-0.5:0.5:0.5)
 pause(0.25);
 F = getframe(gcf);
 writeVideo(v,F);
