@@ -13,31 +13,25 @@ folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_ens\Mach0.8\';
 fileName = strcat('ens_num_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 uv = load(completeName);
-m_lim = 1;
+m_lim = 31;
 for m = 1:m_lim
-    Phi1(:,:) = Phi(:,m);
-    a_n1 = (uv_bar1*Phi1);
-    a_n(:,m) = diag(a_n1);
+    Phi1(:,1) = Phi(:,m);
+    a_n1 = (uv'*Phi1);
+    a_n(:,m) = a_n1;
     clearvars Phi1 a_n1;
 end
-uv_rec = zeros(6360,N/2);
+uv_rec = zeros(6360,N);
 for m = 1:m_lim
-    Phi1(:,:) = Phi(:,m,:);
+    Phi1(:,1) = Phi(:,m);
     a_n2 = a_n(:,m);
     a_n3 = a_n2';
-    a_n1 = repmat(a_n3,6360,1);
-    uv_rec = uv_rec + (Phi1.*a_n1);
+    uv_rec = uv_rec + (Phi1*a_n3);
     clearvars Phi1 a_n1 a_n2 a_n3;
 end
-uv_rec2 = flip(uv_rec,2);
-uv_t_bar = horzcat(uv_rec,uv_rec2(:,193),uv_rec2(:,1:192));
-uvt_bar = uv_t_bar';
-uv_t = ifft(uvt_bar,'symmetric');
-uv2 = uv_t';
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\';
 fileName = strcat('uv_rec_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
-save(completeName,'uv2','-ascii');
+save(completeName,'uv_rec','-ascii');
 end
 %%
 clearvars data_mat1
@@ -414,29 +408,6 @@ for k = 1:386
     xlim([min(x) max(x)]), ylim([min(y) max(y)])
     hold on
     quiver(x1,y1,(((Uphi(:,:,1)')*a1(k,1))+((Uphi(:,:,2)')*a1(k,2)))/272.23,(((Vphi(:,:,1)')*a1(k,1))+((Vphi(:,:,2)')*a1(k,2)))/272.23,'color',[0 0 0]);
-    c.Label.String = 'v/Uinf';
-    F = getframe(gcf);
-    writeVideo(v,F);
-end
-close(v);
-%%
-caxis_mat = zeros(3180,386);
-
-for t = 1:386
-    caxis_mat(:,t) = (Phi(3181:6360,1)*a1(t,1))+(Phi(3181:6360,2)*a1(t,2))+(Phi(3181:6360,3)*a1(t,3))+(Phi(3181:6360,4)*a1(t,4));
-end
-
-cmax1 = max(max(caxis_mat))/272.23;
-cmin1 = min(min(caxis_mat))/272.23;
-v = VideoWriter('Vphi4.avi');
-open(v);
- colordef black
-for k = 1:386
-    contourf(x,y,(((Vphi(:,:,1)')*a1(k,1))+((Vphi(:,:,2)')*a1(k,2))+((Vphi(:,:,3)')*a1(k,3))+((Vphi(:,:,4)')*a1(k,4)))/272.23,100,'LineStyle','none'); xlabel('x/D ->'), ylabel('y/D ->'), title(strcat('t=',num2str(k*10.2/386),'ms')), axis equal
-    c = colorbar, caxis([cmin1 cmax1]);
-    xlim([min(x) max(x)]), ylim([min(y) max(y)])
-    hold on
-    quiver(x1,y1,(((Uphi(:,:,1)')*a1(k,1))+((Uphi(:,:,2)')*a1(k,2))+((Uphi(:,:,3)')*a1(k,3))+((Uphi(:,:,4)')*a1(k,4)))/272.23,(((Vphi(:,:,1)')*a1(k,1))+((Vphi(:,:,2)')*a1(k,2))+((Vphi(:,:,3)')*a1(k,3))+((Vphi(:,:,4)')*a1(k,4)))/272.23,'color',[0 0 0]);
     c.Label.String = 'v/Uinf';
     F = getframe(gcf);
     writeVideo(v,F);
