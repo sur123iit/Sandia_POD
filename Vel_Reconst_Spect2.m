@@ -21,7 +21,10 @@ folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityAnimations\';
 fileName = strcat('Urec_',int2str(r),'.avi');
 completeName = strcat(folderName,fileName);
 v = VideoWriter(completeName);
+<<<<<<< HEAD
 v.FrameRate = 2;
+=======
+>>>>>>> b60db244de0c79f70af91453f8845dffc49dcf99
 open(v);
 for k = 1:386  
 [x1,y1,Uphi,Vphi] = cont_plot_uv(uv_t(:,k));
@@ -57,7 +60,7 @@ xlim([0 5]), ylim([-1 1])
 %set(gcf,'Position',[0 0 1200 400])
 xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
 ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
-xticks(0:1:5), yticks(-0.5:0.5:0.5)
+%xticks(0:1:5), yticks(-0.5:0.5:0.5)
 [x1,y1,Uphi,Vphi] = cont_plot_uv(uv(:,k));
 Phi_viz = Uphi/Uinf;
 subplot(2,2,3);
@@ -74,7 +77,7 @@ xlim([0 5]), ylim([-1 1])
 %set(gcf,'Position',[0 0 1200 400])
 xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
 ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
-xticks(0:1:5), yticks(-0.5:0.5:0.5)
+%xticks(0:1:5), yticks(-0.5:0.5:0.5)
 pause(0.25);
 F = getframe(gcf);
 writeVideo(v,F);
