@@ -642,13 +642,5 @@ completeName =  strcat(folderName,fileName);
 saveas(gca,completeName,'png')
 end
 %% Spectrum of a
-clear all;
-close all;
-[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-for r = 1:Nb
-    folderName = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\a_n\';
-    fileName = strcat('a_n',int2str(r),'.txt');
-    completeName = strcat(folderName,fileName);
-    %%CODING IS LEFT
-end
-
+folderName = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\a_n\';
+fileName = strcat('a_n',int2str(r),'.)

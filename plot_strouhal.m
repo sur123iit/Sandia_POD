@@ -19,7 +19,7 @@ St1 = Fs*D/(2*U);
 for i = 1:N2
     if i == 1
         %plot(0:St:St1-St,a(1:N1,i),'o-')
-        plot(0:St:St1-St,a(1:N1,i),'o-','LineWidth',2)
+        plot(0:St:St1-St,a(1:N1,i),'o-','LineWidth',3)
     end
     if i == 2
         %plot(0:St:St1-St,a(1:N1,i),'s-')
@@ -38,9 +38,11 @@ for i = 1:N2
         plot(0:St:St1-St,a(1:N1,i),'<-','LineWidth',2)
     end
     if i == 6
-        plot(0:St:St1-St,a(1:N1,i),'p-')
+        plot(0:St:St1-St,a(1:N1,i),'p-','LineWidth',2)
     end
-    
+    if i == 7
+        plot(0:St:St1-St,a(1:N1,i),'D-','LineWidth',2)
+    end
     hold on
 end
 ymax = input ('Enter the y limit value from graph: ');
