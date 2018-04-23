@@ -35,19 +35,21 @@ ycoor3 = 29;
 %%
 uvswitch = 3180;
 jj = xcoor3+(106*ycoor3)+uvswitch;
+R = zeros(31,1);
+
 folderName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach0.8\';
 fileName = 'ens_num_1.txt';
 completeName = strcat(folderName,fileName);
 uv = load(completeName);
-R = zeros(30,1);
 upoint = uv(jj,:);
 upoint = upoint';
-for tau = 1:30
+for tau = 1:31
     for ii = 1:386-tau+1
     R(tau,1)= R(tau,1) + (upoint(ii)*upoint(ii+tau-1));
     end
     R(tau,1) = R(tau,1)/(386-tau+1);
 end
+%{
 Rtot = 0;
 for ii = 1:386
     Rtot = Rtot + upoint(ii)*upoint(ii);
@@ -55,7 +57,9 @@ end
 Rtot = Rtot / 386;
 R = R/Rtot;
 R = vertcat(1,R);
-plot(0:0.026:0.78,R,'LineWidth',2)
+%}
+R = R/R(1,1);
+plot(0:0.026:0.78,R','LineWidth',2)
 ylim([-0.3 1]), xlim([0 0.782])
 set(gca,'FontSize',24,'FontWeight','Bold','LineWidth',2);
 pbaspect([1 1 1])
