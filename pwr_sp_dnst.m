@@ -1,8 +1,7 @@
-function [osd_a] = pwr_sp_dnst( a )
+function [osd_a] = pwr_sp_dnst( a,Fs )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 %   a should be a column vector, i.e. its form should be Nx1
-Fs = input('Enter the sampling frequency: ');
 [N1,N2] = size(a);
 a_bar = fft(a);
 psd_a(:,1) = conj(a_bar).*a_bar;
