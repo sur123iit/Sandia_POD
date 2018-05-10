@@ -47,6 +47,8 @@ fileName = 'eigval_decrNvsfreq_50Percent.txt';
 folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\';
 completeName = strcat(folderName,fileName);
 save(completeName,'eig6','-ascii');
+%%
+
 %% Spectrum of 75% energy
 plot(f_index(1:118,1),eig4(1:118,1),'*');
 eig6 = zeros(193,1);
@@ -64,23 +66,44 @@ completeName = strcat(folderName,fileName);
 save(completeName,'eig6','-ascii');
 %% Calculating Phi iteratively exactly at f etc
 folderName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach0.8\';
-fileName = 'ens_num_6.txt';
+fileName = 'ens_num_4.txt';
 completeName = strcat(folderName,fileName);
 uv = load(completeName);
 uv_bar = fft(uv');
 uv_bar1(:,:) = uv_bar(1:193,:);
-uv_rec_bar = zeros(6360,193);
+p = [1+i 2-i];
+uv_rec_bar = zeros(6360,193,'like',p);
 for ii = 1:118
     a_temp = uv_bar1(f_index(ii),:)*Phi(:,m_index(ii),f_index(ii));
     uv_rec_bar(:,f_index(ii))= uv_rec_bar (:,f_index(ii))+ (a_temp*Phi(:,m_index(ii),f_index(ii)));
     clearvars a_temp;
 end
-uv_rec2 = flip(uv_rec_bar,2);
-uv_t_bar = horzcat(uv_rec_bar,uv_rec2(:,193),uv_rec2(:,1:192));
-uvt_bar = uv_t_bar';
-uv_t = ifft(uvt_bar,'symmetric');
+uv_t = ifft(uv_rec_bar',386,'symmetric');
 uv2 = uv_t';
 folderName = 'Y:\rawdata\Sandia_cavity\DecrEnSpectralReconstructions\';
 fileName = strcat('uv_rec_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'uv2','-ascii');
+%% Plot comparisons
+eig11 = sum(eig1,1)/sum(sum(eig1));
+eig11 = eig11';
+eig12 = horzcat(eig11,eig6);
+plot_strouhal(eig12)
+eig13 = sum(eig1(1:3,:),1)/sum(sum(eig1));
+eig13 = eig13';
+eig12 = horzcat(eig11,eig6,eig13);
+plot_strouhal(eig12);
+xticks(0:0.25:0.5), yticks(0:0.04:0.08)
+set(gca,'LineWidth',2,'FontSize',18,'FontWeight','Bold');
+lgd = legend('Total','DecrEn','Presented');
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0],[800 800]);
+xlabel('St_D','FontSize',34),
+ylabel('\eta','FontSize',34);
+pbaspect([1 1 1]);
+%% Plot these values
+plot(f_index(1:118,1)*97.15*D/Uinf,eig4(1:118,1),'*')
+pbaspect([1 1 1])
+xticks(0:0.25:0.5)
+xlim([0 0.5])
+yticks(0:0.02:0.04)

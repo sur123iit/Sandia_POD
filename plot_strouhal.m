@@ -19,7 +19,7 @@ St1 = Fs*D/(2*U);
 for i = 1:N2
     if i == 1
         %plot(0:St:St1-St,a(1:N1,i),'o-')
-        plot(0:St:St1-St,a(1:N1,i),'o-','LineWidth',3)
+        plot(0:St:St1-St,a(1:N1,i),'o-','LineWidth',2)
     end
     if i == 2
         %plot(0:St:St1-St,a(1:N1,i),'s-')
