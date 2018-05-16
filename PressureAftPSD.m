@@ -11,7 +11,6 @@ load(completeName);
 pmean1(:,:) = mean(pressure,2);
 pmean2(:,1) = mean(pmean1,2);
 pmean3 = mean(pmean2,1);
-
 %%
 pressure_psd = zeros(12500,1);
 for r = 1:56
@@ -19,28 +18,6 @@ for r = 1:56
         pinst(:,1) = pressure(:,cyc,r);
         pfluc = pinst-pmean3;
         p_psd = pwr_sp_dnst(pfluc,200*10^3);
-        pressure_psd = pressure_psd + p_psd;
-        clearvars p_psd pinst;
-    end
-end
-pressure_psd = pressure_psd/Nb;
-%%
-pressure_psd = zeros(12500,1);
-for r = 1:56
-    for cyc = 1:5
-        pinst(:,1)=pressure(:,cyc,r);
-        p_psd = pwr_sp_dnst(pinst,200*10^3);
-        pressure_psd = pressure_psd + p_psd;
-        clearvars p_psd pinst;
-    end
-end
-%%
-pressure_psd = zeros(25000,1);
-for r = 1:56
-    for cyc = 1:5
-        pinst(:,1) = pressure(:,cyc,r);
-        p_bar = fft(pinst);
-        p_psd = p_bar.*conj(p_bar);
         pressure_psd = pressure_psd + p_psd;
         clearvars p_psd pinst;
     end
@@ -67,25 +44,3 @@ set(gcf,'Position',[0 0 800 800])
 xlim([f_range(2) 0.5]);
 set(gca,'yscale','log');
 %%
-ros_mode = Ros_freq(Mach,4,L);
-ros_mode = ros_mode*D/Uinf;
-f_range = linspace(0,61*10^3*D/Uinf,12500);
-plot(f_range',pressure_psd,'LineWidth',2);
-hold on
-for i = 1:4
-    plot([ros_mode(i,1) ros_mode(i,1)],[10^-4 10],'--','LineWidth',2)
-    hold on;
-end
-hold off
-pbaspect([1 1 1]);
-set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
-xlabel('St_D','FontSize',34), ylabel('PSD (kPa^2/Hz)','FontSize',34), xticks(0:0.25:0.5), yticks([10^-4 10^-2 10^0])
-lgd = legend('PSD (aft wall pressure)','RF1','RF2','RF3','RF4','Location','NorthEast');
-lgd.FontSize = 12;
-set(gcf,'Position',[0 0 800 800])
-xlim([f_range(2) 0.5]);
-set(gca,'yscale','log');
-%%
-f_range = linspace(0, 63.5*10^3,12500);
-semilogy(f_range,pressure_psd);
-xlim([f_range(2) 5*10^3]);
