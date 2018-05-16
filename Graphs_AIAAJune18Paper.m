@@ -427,8 +427,8 @@ clear all;
 close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
-r = [4000 4500 5500];
-for ii = 1:3
+r = [3500 4000 4500 5500];
+for ii = 1:4
 fileName = strcat('Phi_trN_',int2str(r(ii)),'.txt');
 completeName = strcat(folderName,fileName);
 Phi1 = load(completeName);
@@ -436,19 +436,21 @@ fileName = strcat('Phi_trN_',int2str(r(ii)+500),'.txt');
 completeName = strcat(folderName,fileName);
 Phi2 = load(completeName);
 dot_Phi = abs(dot(Phi1,Phi2));
-if ii == 3
-    plot(1:200,dot_Phi,'o-','LineWidth',3,'Color',[0 0 1]);
-    plot([23 23],[0 dot_Phi(23)],'--','LineWidth',2);
-elseif ii == 2
+if ii == 4
+    plot(1:200,dot_Phi,'o-','LineWidth',3);
+    plot([23 23],[0 dot_Phi(23)],'--','LineWidth',2,'Color',[0 0.5 0.5]);
+elseif ii == 1
     plot(1:200,dot_Phi,'s-','LineWidth',2);
-else
+elseif ii == 2
     plot(1:200,dot_Phi,'^-','LineWidth',2);
+else
+    plot(1:200,dot_Phi,'>-','LineWidth',2);
 end
 hold on
 clearvars Phi1 Phi2 dot_Phi;
 end
-xlim([1 30]), ylim([0 1.2]),xticks(0:10:30),yticks(0:0.25:1.0)
-lgd = legend('4000-4500','4500-5000','5500-6000','Location','NorthEast')
+xlim([1 30]), ylim([0 1.3]),xticks(0:10:30),yticks(0:0.25:1.0)
+lgd = legend('3500-4000','4000-4500','4500-5000','5000-5500','Location','NorthEast')
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
@@ -459,52 +461,99 @@ clear all;
 close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
-r = [3500 4500 5000];
-for ii = 1:3
+r = [3500 4000 4500 5000];
+for ii = 1:4
 fileName = strcat('Phi_ensN_',int2str(r(ii)),'.txt');
 completeName = strcat(folderName,fileName);
 Phi1 = load(completeName);
-fileName = strcat('Phi_ensN_',int2str(r(ii)+500),'.txt');
+if ii == 2
+fileName = strcat('Phi_ensN_',int2str(r(ii)+200),'.txt');
 completeName = strcat(folderName,fileName);
 Phi2 = load(completeName);
-dot_Phi = abs(dot(Phi1,Phi2));
-if ii == 3
-    plot(1:200,dot_Phi,'o-','LineWidth',3,'Color',[0 0 1]);
-    plot([51 51],[0 dot_Phi(51)],'--','LineWidth',2);
-elseif ii == 2
-    plot(1:200,dot_Phi,'s-','LineWidth',2);
 else
+fileName = strcat('Phi_ensN_',int2str(r(ii)+500),'.txt');
+completeName = strcat(folderName,fileName);
+Phi2 = load(completeName);    
+end
+dot_Phi = abs(dot(Phi1,Phi2));
+if ii == 4
+    plot(1:200,dot_Phi,'o-','LineWidth',3);
+    plot([51 51],[0 dot_Phi(51)],'--','LineWidth',2,'Color',[0 0.5 0.5]);
+elseif ii == 1
+    plot(1:200,dot_Phi,'s-','LineWidth',2);
+elseif ii == 2
     plot(1:200,dot_Phi,'^-','LineWidth',2);
+else
+    plot(1:200,dot_Phi,'>-','LineWidth',2);
 end
 hold on
 clearvars Phi1 Phi2 dot_Phi;
 end
-xlim([1 60]), ylim([0 1.2]), xticks(0:20:60), yticks([0:0.25:1.0])
-lgd = legend('3500-4000','4500-5000','5000-5500','Location','NorthEast')
+xlim([1 60]), ylim([0 1.3]), xticks(0:20:60), yticks(0:0.25:1.0)
+lgd = legend('3500-4000','4000-4500','4500-5000','5000-5500','Location','NorthEast')
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
-xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_i^N^1 . \Phi_i^N^2>','FontSize',34), 
+xlabel('Mode Number (i)','FontSize',34), ylabel('<\Phi_i^N^1 . \Phi_i^N^2>','FontSize',34),
 %% POD convergence with Runs based on energy (Time Resolved)
 clear all;
 close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
-r = [500 1000 1500 2000 2500 3000 3500 4000];
-for ii = 1:4
+r = [1000 2000 3000 4000 5000];
+for ii = 1:5
 fileName = strcat('eigval_trN_',int2str(r(ii)),'.txt');
 completeName = strcat(folderName,fileName);
 eig1 = load(completeName);
 eig2 = eig1/sum(eig1);
 eig3 = en_convergence(eig2);
+if ii == 1
+    eig_plot = eig3;
+end
 plot(1:200,eig3(1:200),'LineWidth',2);
 hold on
 clearvars eig1 eig2;
 end
+hold on
+line([1 1 20 20 0],[0 1 1 0 0],'Color','r','LineWidth',2)
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
-xlim([1 100]), ylim([0 1.15]), xticks(0:20:100), yticks([0:0.25:1.0])
-lgd = legend('500','1000','1500','2000','Location','NorthEast')
+xlim([1 100]), ylim([0 1.3]), xticks(0:20:100), yticks([0:0.25:1.0])
+lgd = legend('1000','2000','3000','4000','5000','Location','NorthEast')
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+pbaspect([1 1 1])
+xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34),
+%% POD convergence with Runs based on energy (Time Resolved)
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+r = [1000 2000 3000 4000 5000];
+for ii = 1:5
+fileName = strcat('eigval_trN_',int2str(r(ii)),'.txt');
+completeName = strcat(folderName,fileName);
+eig1 = load(completeName);
+eig2 = eig1/sum(eig1);
+eig3 = en_convergence(eig2);
+if ii == 1
+    plot(1:200,eig3(1:200),'o-','LineWidth',2);
+elseif ii == 2
+    plot(1:200,eig3(1:200),'s-','LineWidth',2);
+elseif ii == 3
+    plot(1:200,eig3(1:200),'^-','LineWidth',2);
+elseif ii == 4
+plot(1:200,eig3(1:200),'>-','LineWidth',2);
+else
+    plot(1:200,eig3(1:200),'<-','LineWidth',2);
+
+end
+hold on
+clearvars eig1 eig2;
+end
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlim([1 20]), ylim([0 1]), xticks(0:5:20), yticks([0:0.25:1.0])
+lgd = legend('1000','2000','3000','4000','5000','Location','NorthEast')
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
@@ -514,8 +563,8 @@ clear all;
 close all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
-r = [500 1000 1500 2000 2500 3000 3500 4000];
-for ii = 1:4
+r = [1000 2000 3000 4000 5000];
+for ii = 1:5
 fileName = strcat('eigval_ensN_',int2str(r(ii)),'.txt');
 completeName = strcat(folderName,fileName);
 eig1 = load(completeName);
@@ -524,9 +573,40 @@ plot(1:200,eig3(1:200),'LineWidth',2);
 hold on
 clearvars eig1 eig2;
 end
+line([1 1 20 20 0],[0 1 1 0 0],'Color','r','LineWidth',2)
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
-xlim([1 100]), ylim([0 1.15]), xticks(0:20:100), yticks([0:0.25:1.0])
-lgd = legend('500','1000','1500','2000','Location','NorthEast')
+xlim([1 100]), ylim([0 1.3]), xticks(0:20:100), yticks([0:0.25:1.0])
+lgd = legend('1000','2000','3000','4000','5000','Location','NorthEast')
+lgd.FontSize = 12;
+set(gcf,'Position',[0 0 800 800])
+pbaspect([1 1 1])
+xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34),
+%%
+clear all;
+close all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+folderName = strcat('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach',num2str(Mach),'\');
+r = [1000 2000 3000 4000 5000];
+for ii = 1:5
+fileName = strcat('eigval_ensN_',int2str(r(ii)),'.txt');
+completeName = strcat(folderName,fileName);
+eig1 = load(completeName);
+eig3 = en_convergence(eig1);
+if ii == 1
+    plot(1:200,eig3(1:200),'o-','LineWidth',2);
+elseif ii == 2
+    plot(1:200,eig3(1:200),'s-','LineWidth',2);
+elseif ii == 3
+    plot(1:200,eig3(1:200),'^-','LineWidth',2);
+else
+plot(1:200,eig3(1:200),'>-','LineWidth',2);
+end
+hold on
+clearvars eig1 eig2;
+end
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlim([1 20]), ylim([0 1]), xticks(0:5:20), yticks([0:0.25:1.0])
+lgd = legend('1000','2000','3000','4000','5000','Location','NorthEast')
 lgd.FontSize = 12;
 set(gcf,'Position',[0 0 800 800])
 pbaspect([1 1 1])
