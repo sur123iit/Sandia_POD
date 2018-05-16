@@ -665,8 +665,8 @@ eig3 = sort(eig2,'desc');
 eig3 = eig3/sum(eig3);
 yyaxis right
 bar(eig3(1:500),'FaceColor',right_color)
-xlim([1 200]), ylim([0 0.05]),
-xticks(0:50:200), yticks(0:0.01:0.05)
+xlim([0 50]), ylim([0 0.05]),
+xticks(10:10:50), yticks(0:0.01:0.05)
 xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
 set(gcf,'Position',[0 0 900 800])
 pbaspect([1 1 1])
