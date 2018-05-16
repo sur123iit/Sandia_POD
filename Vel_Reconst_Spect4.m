@@ -8,7 +8,8 @@ fileName = 'Phi_280.mat';
 completeName = strcat(folderName,fileName);
 load(completeName);
 %%
-for r = 1:280  
+%for r = 1:280  
+r = 6;
 clearvars -except Phi r
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach0.8\';
@@ -38,7 +39,7 @@ uv_t_bar = horzcat(uv_rec,uv_rec2(:,193),uv_rec2(:,1:192));
 uvt_bar = uv_t_bar';
 uv_t = ifft(uvt_bar,'symmetric');
 uv2 = uv_t';
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\';
+folderName = 'Y:\rawdata\Sandia_cavity\DecrEnSpectralReconstructions\';
 fileName = strcat('uv_rec_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'uv2','-ascii');
