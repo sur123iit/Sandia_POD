@@ -321,3 +321,41 @@ xlabel('St_D','FontSize',34,'FontWeight','Bold'), ylabel('PSD (1/Hz)','FontSize'
 set(gcf,'Position',[0 0 800 00],'OuterPosition',[0 0 900 900])
 lgd = legend('Measured','75% energy','50% energy','Mode 1');
 lgd.FontSize = 12;
+%%
+clear all;
+%%
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+%%
+xcoor2 = 21;
+ycoor2 = 17;
+folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_ens\Mach0.8\';
+uv_psd_meas = zeros(193,2);
+%%
+uvswitch = 3180;
+jj = xcoor2 + (106*ycoor2) + uvswitch;
+%%
+for r = 1:Nb
+    fileName = strcat('ens_num_',int2str(r),'.txt');
+    completeName = strcat(folderName,fileName);
+    uv = load(completeName);
+    uv_point(:,1) = uv(jj,:);
+    uv_bar = fft(uv_point);
+    u_psd = conj(uv_bar).*uv_bar;
+    uv_psd_meas(:,2) = uv_psd_meas(:,2) + u_psd(1:193);
+end
+%% Plot these graphs
+psd1 = uv_psd_meas(:,1)/sum(uv_psd_meas(:,1));
+psd2 = uv_psd_spat35(:,1)/sum(uv_psd_meas(:,1));
+psd3 = uv_psd_spec35(:,1)/sum(uv_psd_meas(:,1));
+%psd4 = uv_psd_spatm1(:,2)/sum(uv_psd(:,2));
+psd_draw = horzcat(psd1,psd2,psd3);
+plot_strouhal(psd_draw);
+pbaspect([1 1 1]);
+set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
+xlabel('St_D','FontSize',34,'FontWeight','Bold'), ylabel('PSD (1/Hz)','FontSize',34,'FontWeight','Bold'), xticks(0:0.25:0.5); yticks(0:0.05:0.1);
+set(gcf,'Position',[0 0 800 800])
+lgd = legend('Measured','Spatial','Spectral','RF1','RF2','RF3','RF4');
+lgd.FontSize = 12;
+%%
+
+
