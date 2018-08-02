@@ -5,7 +5,7 @@ clear all;
 %Spectral ensembled data is called
 folderName = strcat('Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach',num2str(Ma),'\');
 %% Data collection
-for ens_num = 1:8
+for ens_num = 1:10
     fileName = strcat('ens_num_',int2str(ens_num),'.txt');
     completeName = strcat(folderName,fileName);
     uv = load(completeName);
