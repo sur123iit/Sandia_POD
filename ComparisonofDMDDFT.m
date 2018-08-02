@@ -112,3 +112,5 @@ psd2 = psd2/sum(psd2);
 psd_draw = horzcat(psd1,psd2);
 plot_strouhal(psd_draw);
 plot_strouhal(psd1);
+%% Construct the DFT exponential matrix
+
