@@ -1,10 +1,6 @@
 %% This program is to plot the points on the cavity
 clear all;
-%%
-[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-[x1,y1] = getxy();
-x2 = x1/D;
-y2 = y1/D;
+%% Notes
 %{
 x1(32) = 1.5;
 x1(54) = 2.5;
@@ -12,6 +8,11 @@ x1(88) = 4;
 y1(29) = -0.25;
 y1(17) = 0;
 %}
+%% Fig. 2 a)
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+[x1,y1] = getxy();
+x2 = x1/D;
+y2 = y1/D;
 folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_mean\Mach0.8\';
 fileName = 'vel_mean.txt';
 completeName = strcat(folderName,fileName);
@@ -34,7 +35,6 @@ s = streamline(x1/D,y1/D,Uphi',Vphi',sttx,stty);
 set(s,'Color',[0.5 0.5 0.5],'LineWidth',1.5);
 caxis([-cmax cmax]);
 colormap(jet(256))
-
 plot([x2(54) x2(88)],[y2(17) y2(29)],'*','Color',[0 0 0],'MarkerSize',12);
 line([-0.1 0 0 0 0 5 5 5 5 5.1],[0 0 -1 0 -1 -1 -1 0 0 0],'Color',[0 0 0],'LineWidth',2);
 set(gca,'FontSize',24,'FontWeight','Bold','LineWidth',2);
@@ -50,8 +50,8 @@ hold off
 %% Plot Auto-correlation plots for these points
 clear all;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-xcoor1 = 32;
-ycoor1 = 29;
+%xcoor1 = 32;
+%ycoor1 = 29;
 xcoor2 = 54;
 ycoor2 = 17;
 xcoor3 = 88;
@@ -73,23 +73,10 @@ for r = 1:40
          end
     end
 end
+%%
 for tau = 1:31
     R(tau,1) = R(tau,1)/(r*(386-tau+1));
 end
-%R(tau,1) = R(tau,1)/(386-tau+1);
-
-
-
-
-%{
-Rtot = 0;
-for ii = 1:386
-    Rtot = Rtot + upoint(ii)*upoint(ii);
-end
-Rtot = Rtot / 386;
-R = R/Rtot;
-R = vertcat(1,R);
-%}
 R = R/R(1,1);
 plot(0:0.026:0.78,R','LineWidth',2)
 ylim([-0.3 1]), xlim([0 0.782])

@@ -1,54 +1,56 @@
-%This program is a test program that saves a .dat for plotting dot_product
-%for first 100 modes
-folder_nm = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\';
-file_nm = strcat(folder_nm,'test_dot','.dat');
-datfile = fopen(file_nm,'w+');
-
-fprintf(datfile,'VARIABLES = "dot_product1" "mode_num" \n');
-
-[I,I1] = size(dot_product1);
-J = 1;
-K = 1;
-
-fprintf(datfile, 'ZONE T = "DotProduct" \n');
-fprintf(datfile, 'I = %i, J = %i, K = %i \n',I,J,K);
-
-for u = 1:I
-    fprintf(datfile,'%f  %f',mode_num(u,1), dot_product1(u,1));
-    fprintf(datfile,'\n');
-end
-fclose(datfile);
-%%
-% This section hasn't been run completely yet. Wait for compiler
+%% 2 D velocity field
 clear all;
-close all;
-clc;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 
-z = 160*membrane(1,100); %This is a 201x201 matrix as membrane creates a 2*m +1 by 2*m +1 matrix
-s = surface(z);
-s.EdgeColor = 'none';
-view(3)
+%% Load mean field
+folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_mean\Mach0.8\';
+fileName = 'vel_mean.txt';
+completeName = strcat(folderName,fileName);
+uvm1 = load(completeName);
+uvm = uvm1(:,6);
 
-I = size(z,1); J = size(z,2); K =1;
-total_points = I*J*K;
+%% Load fluctuation
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\35percentEnergy_1\';
+fileName = 'uv_rec_6.txt';
+completeName = strcat(folderName,fileName);
+uv = load(completeName);
 
-x = linspace(1,I,I);
-y = linspace(1,J,J);
-[X, Y] = meshgrid(x,y);
+%% Total velocity and X and Y
+UV = uv + uvm;
+folderName = 'C:\Users\surabhi123iit\Documents\MATLAB\Raw\';
+fileName = 'B00001.dat';
+completeName = strcat(folderName,fileName);
+[a, ~] = importdata(completeName);
+b = a.data;
+x1 = b(:,1);
+y1 = b(:,2);
+[X1,Y1] = getxy();
+%% Start writing the file
+UV1 = horzcat(x1,y1,UV(1:3180,:));
+I = size(X1,1);
+J = size(Y1,1);
+c = 3;
+UVrec = UV1';
+%%
+for frames = 1:1:size(UVrec,1)-2
+    if frames == 1
+        fid = fopen('C:\Users\surabhi123iit\Documents\MATLAB\Raw\test.txt','wt');
 
-X = reshape(X,total_points,1);%make it linear
-Y = reshape(Y,total_points,1);%make it linear
-z = reshape(z,total_points,1);%make it linear
-vars = [X,Y,z];
-
-tecplot_home = 'C:\Program Files\Tecplot\Tecplot 360 EX 2015 R1';
-tecio_path = strcat(tecplot_home,'tecutilinternal_tecio_exer.dll');
-tecio_header_path = strcat(tecplot_home,'\include\TECIO.h');
-
-if ~libisloaded('tecio')
-    [notfound,warnings] = loadlibrary(tecio_path, tecio_header_path, ...
-        'alias','tecio');
+header1 = 'Variables = "X", "Y", "T" \nZone T = "Zone1" \nZoneType=Ordered';
+header2 = ['\nI=' num2str(I) ' \nJ=' num2str(J) ' \nDataPacking=Block'];
+header3 = ['\nSolutionTime=' num2str(1 + 1/Fs) ' \n StrandId=1 \n'];
+fprintf(fid,'%f \n',[header1 header2 header3]);
+fprintf(fid,'%f \n',[UVrec(1,:),UVrec(2,:),UVrec(c,:)]');
+    else
+        c = c + 1;
+        header1 = [' \nZONE T="Zone ' num2str(c-3) '" \nZoneType=Ordered'];
+        header3 = ['\nSolutionTime=' num2str(1+((c-3)/Fs)) ' \nStrandId=1 \nVARSHARELIST=([1-2]=1) \n'];
+        fprintf(fid,[header1 header2 header3]);
+        fprintf(fid, '%f \n', [UVrec(c,:)]);
+    end
 end
+fclose(fid);
+   
+  
 
-libfunctionsview('tecio')
-
+    

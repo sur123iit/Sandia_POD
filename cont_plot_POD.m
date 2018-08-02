@@ -17,12 +17,15 @@ caxis([-l l]);%pick l1 or l2 (larger of the two)
 colormap(redblue)
 %depending on location
 set(gca,'FontSize',20,'FontWeight','Bold','LineWidth',2);
-%h = colorbar;
+line([-0.1 0 0 0 0 5 5 5 5 5.1],[0 0 -1 0 -1 -1 -1 0 0 0],'Color',[0 0 0],'LineWidth',2);
+set(gcf,'Position',[0 0 1265 550])
+xlim([-0.2 5.2]), ylim([-1.1 1.1])
+pbaspect([5.4 2.2 1])
+xticks(0:1:5), yticks(-1:1:1)%h = colorbar;
 %set(h,'LineWidth',2);
 %xlabel('x/D','FontSize',40,'FontWeight','Bold'), %depending on location 
 %ylabel('y/D','FontSize',40,'FontWeight','Bold'), %location on paper
-axis equal
-set(gcf,'Position',[0 0 1200 400]), %depending on location (400 or 420) 
-xticks(0:1:5), yticks(-0.5:0.5:0.5)
+%axis equal
+%set(gcf,'Position',[0 0 1200 400]), %depending on location (400 or 420) 
 end
 

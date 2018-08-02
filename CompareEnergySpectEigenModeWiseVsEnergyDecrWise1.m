@@ -19,9 +19,9 @@ completeName = strcat (folderName,fileName);
 uv2 = load(completeName);
 
 %%
-[x1,y1,Uphi,Vphi] = cont_plot_uv( uv2(:,15) );
+[x1,y1,Uphi,Vphi] = cont_plot_uv( uv(:,150));
 figure();
-contourf(x1/D,y1/D,Vphi',100,'LineStyle','none');
+contourf(x1/D,y1/D,Uphi',100,'LineStyle','none');
 colormap(redblue);
 axis equal
 %% Plot the grid matrix
@@ -30,3 +30,7 @@ clear all;
 folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\';
 fileName = 'eigval_decrNvsfreq_50Percent.txt';
 %% 
+folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_ens\Mach0.8\';
+fileName = 'ens_num_4.txt';
+completeName = strcat (folderName,fileName);
+uv1 = load(completeName);

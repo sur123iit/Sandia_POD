@@ -17,8 +17,8 @@ pbaspect([1 1 1]);
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
 xlabel('St_D','FontSize',34,'FontWeight','Bold'), ylabel('\eta_i','FontSize',34,'FontWeight','Bold'), xticks(0:0.25:0.5); yticks(0:0.05:0.1);
 set(gcf,'Position',[0 0 700 700],'OuterPosition',[0 0 900 900])
-lgd = legend('\eta_t','\eta_1','\eta_2','\eta_3','\eta_4','RF_1','RF_2','RF_3','RF_4');
-lgd.FontSize = 12;
+lgd = legend('\eta_t','\eta_1','\eta_2','\eta_3','\eta_4');
+lgd.FontSize = 35;
 %% Graph name: Spect_POD_ModeVsStrouhal Normalized
 %Description: Spectral POD eigen-value plot of Mode 1..4 and Total vs Strouhal Number containing Rossiter Mode frequencies
 clear all;
@@ -124,7 +124,6 @@ plot([1 5:5:100],[eigval_2_conv(1,1) eigval_2_conv(5:5:100,1)'],'o','MarkerSize'
 plot([1 5:5:100],[eigval_3_conv(1,1) eigval_3_conv(5:5:100,1)'],'o','MarkerSize',5,'MarkerFaceColor','g','MarkerEdgeColor','g')
 plot([1 5:5:100],[eigval_4_conv(1,1) eigval_4_conv(5:5:100,1)'],'o','MarkerSize',5,'MarkerFaceColor','m','MarkerEdgeColor','m')
 plot([1 5:5:100],[sum_eigval5(1,1) sum_eigval5(5:5:100,1)'],'o','MarkerSize',5,'MarkerFaceColor','b','MarkerEdgeColor','b')
-
 pbaspect([1 1 1]);
 set(gca,'fontsize',18,'FontWeight','Bold','LineWidth',2);
 xlabel('Mode Number (i)','FontSize',34), ylabel('\eta_f','FontSize',34), 
@@ -665,8 +664,8 @@ eig3 = sort(eig2,'desc');
 eig3 = eig3/sum(eig3);
 yyaxis right
 bar(eig3(1:500),'FaceColor',right_color)
-xlim([1 200]), ylim([0 0.05]),
-xticks(0:50:200), yticks(0:0.01:0.05)
+xlim([0 50]), ylim([0 0.05]),
+xticks(10:10:50), yticks(0:0.01:0.05)
 xlabel('Mode Number (i)','FontSize',34), ylabel('\eta','FontSize',34), 
 set(gcf,'Position',[0 0 900 800])
 pbaspect([1 1 1])
