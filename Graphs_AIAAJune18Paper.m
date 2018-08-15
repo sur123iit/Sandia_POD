@@ -166,7 +166,7 @@ set(gcf,'Position',[0 0 800 800])
 %Check if Cont_plot_SPOD_AIAA.mat is there in Raw folder or not
 clear all;
 close all;
-load('C:\Users\surabhi123iit\Documents\MATLAB\Raw\Cont_plot_SPOD_AIAA.mat');
+load('Y:\rawdata\Sandia_cavity\Cont_plot_SPOD_AIAA.mat');
 %2 6 9: indices
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 index_freq = 9;
