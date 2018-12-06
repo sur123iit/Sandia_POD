@@ -1,0 +1,74 @@
+x = 0:0.1:10;
+y = 0:0.1:10;
+z = 0:0.1:10;
+l = 2;
+m = 1;
+n = 0;
+px = (cos(pi*l*x/10))';
+py = (cos(pi*m*y/10))';
+p_lmn = px*py';
+contourf(x,y,p_lmn',10);
+colormap(redblue);
+colorbar;
+axis equal
+%%
+%Solve Bessel's equation
+
+syms z1;
+f = besselj(1,z1) ;
+%for ii = 1:3
+    vpasolve(f,z1,6)
+%end
+%%
+
+syms z1;
+f = (besselj(1,z1)/z1) - 0.706  ;
+for ii = 41:60
+    vpasolve(f,z1,ii)
+end
+%% Question 2
+r = -1:0.01:1;
+z = 0:0.01:6;
+n = 1;
+pr = (besselj(0,3.8317*r))';
+pz = (cos(n*pi*z/1))';
+p_lmn = pz*pr';
+contourf(z,r,p_lmn',25,'LineStyle','none');
+colormap(redblue);
+set(gca,'fontsize',24,'FontWeight','Bold','LineWidth',2);
+xlabel('z','FontSize',38,'FontWeight','Bold','FontAngle','Italic'), ylabel('r','FontSize',38,'FontWeight','Bold','FontAngle','Italic');
+%colorbar;
+axis equal
+%% Question 3
+n = 0;
+x = 0:0.1:40;
+y = 0:0.1:10;
+py = (cos((n+0.5)*pi*y/10))';
+px = (cos(0.33*x))';
+p_lmn = px*py';
+contourf(x,y,p_lmn',25,'LineStyle','none');
+colormap(redblue);
+set(gca,'fontsize',24,'FontWeight','Bold','LineWidth',2);
+xlabel('x','FontSize',38,'FontWeight','Bold','FontAngle','Italic'), ylabel('y ','FontSize',38,'FontWeight','Bold','FontAngle','Italic');
+%colorbar;
+axis equal
+%%
+freq = 0.1*1010:10:1000;
+a = 6*10^-2;
+L = 85*10^-2;
+R1 = ((2*pi*freq*a/343).^2)/2;
+R2 = (L + (8*a)/(3*pi))*(0.31./sqrt(freq))/(2*a);
+A_ab = R2./((R1 + R2).^2);
+A_s = R1./((R1 + R2).^2);
+A_ab_den = ((L + (8*a)/(3*pi))*(0.31./sqrt(freq)))/(2*a);
+A_ab = 2*343*a./((2*pi*freq).*((A_ab_den+ (a)/2).^2));
+A_s = 4*343*A_ab_den./((2*pi*freq).*((A_ab_den+ (a)/2).^2));
+plot(freq,A_ab,freq,A_s,'LineWidth',2);
+set(gca,'fontsize',24,'FontWeight','Bold','LineWidth',2);
+xlabel('f','FontSize',38,'FontWeight','Bold','FontAngle','Italic'), ylabel('A/\pi a^2','FontSize',38,'FontWeight','Bold','FontAngle','Italic');
+%colorbar;
+legend('A_a_b/\pi a^2','A_s/\pi a^2')
+legend('a = 1.5 cm','a = 6 cm');
+pbaspect([1.5 1 1])
+plot(freq,A_s,'LineWidth',2)
+hold on;

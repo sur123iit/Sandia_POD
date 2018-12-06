@@ -14,6 +14,21 @@ jj = xcoor2+(106*ycoor2) + uvswitch;
 %%
 uv_psd = zeros(193,2);
 %%
+uv_point(:,1) = Y_rec1(jj,:);
+uv_bar = fft(uv_point);
+u_psd = conj(uv_bar).*uv_bar;
+u_psd1 = u_psd;
+uv_point(:,1) = y(jj,:);
+uv_bar = fft(uv_point);
+u_psd = conj(uv_bar).*uv_bar;
+u_psd2 = u_psd;
+u_psdt = sum(u_psd2);
+u_psd1 = u_psd1/u_psdt;
+u_psd2 = u_psd2/u_psdt;
+f_axis = linspace(0,18750,193);
+plot(f_axis,u_psd1(1:193),f_axis,u_psd2(1:193));
+xlim([0 12000])
+%%
 for r = 1:Nb
     fileName = strcat('ens_num_',int2str(r),'.txt');
     completeName = strcat(folderName,fileName);

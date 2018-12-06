@@ -26,12 +26,18 @@ if (mod(m,2) == 0)
     b = [1; 0.85*(ones(m1-1,1)-r1)];
 else
     % From [0 0 1] to [1 1 1] to [1 0 0];
-    m1 = floor(m*0.5);
-    r = (0:m1-1)'/max(m1,1);
-    g = r;
-    r = [r; ones(m1+1,1)];
-    g = [g; 1; flipud(g)];
-    b = flipud(r);
+    %m1 = floor(m*0.5);
+    m1 = m;
+    %r = (0:m1-1)'/max(m1,1);
+    r1 = (1:m1-1)'/(max(m1-1,1));
+
+    %g = r;
+    r = [1; 0.85*(ones(m1-1,1)-r1)];
+    g = [1; 0.85*(ones(m1-1,1)-r1)];
+    b = [1; 0.85*(ones(m1-1,1)-r1)];
+    %r = [r; ones(m1+1,1)];
+    %g = [g; 1; flipud(g)];
+    %b = flipud(r);
 end
 
 c = [r g b]; 

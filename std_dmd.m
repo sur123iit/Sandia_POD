@@ -12,4 +12,3 @@ dmd_evals = diag(dmd_evals1);
 dmd_modes = Qx*dmd_vec;
 mode_frequencies = angle(dmd_evals)*Fs/(2*pi);
 end
-
