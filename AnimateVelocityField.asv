@@ -21,9 +21,9 @@ clear all;
 
 %%
 c_lim = 1.2575;
-%c_lim = 0.3;
-folderName = 'Y:\rawdata\Sandia_cavity\';
-fileName = strcat('Urec_meas_red_',int2str(ens_num),'.avi');
+c_lim = 0.3;
+folderName = 'C:\Users\surabhi123iit\Dropbox (UFL)\Spring 2018\Spring 2018 documents\Sandia Work\Fall2018\';
+fileName = strcat('Vrec_meas_red_',int2str(ens_num),'.avi');
 completeName = strcat(folderName,fileName);
 v = VideoWriter(completeName);
 v.FrameRate = 2;

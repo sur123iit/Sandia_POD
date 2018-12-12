@@ -21,3 +21,6 @@ end
 %%
 lambda = lambda/sum(sum(lambda));
 %%
+completeName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\eigval_lf_N5000.txt';
+save(completeName,'lambda','-ascii');
+%%

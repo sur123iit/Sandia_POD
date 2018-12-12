@@ -3,6 +3,7 @@ clear all;
 %%
 [L,D,Ma,Uinf,Fs,N,Nb] = load_parameters(1);
 %%
+a_n_f = zeros(193,200);
 folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_ens\Mach0.8\';
 Phi = load('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\Phi_ensN_5000.txt');
 for ens_num = 1:Nb
@@ -14,16 +15,11 @@ for ens_num = 1:Nb
     a_n1 = (uv'*Phi);
     a_nf = fft(a_n1);
     a_nf1 = a_nf(1:193,:);
-    la
-    
-a_spat = load(strcat('Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\a_n20modes\a_n',int2str(ens_num),'.txt'));
-a_mean = mean(a_spat,1);
-a_spat1 = a_spat - a_mean;
-a_spatf = fft(a_spat1);
-lambda1 = conj(a_spatf).*a_spatf;
-lambda =  lambda + lambda1(1:193,:);
+    a_n_f = a_n_f + a_nf1;
 end
 %%
-lambda = lambda/sum(sum(lambda));
-lambda = lambda*0.684325;
-%%
+a_n_f = a_n_f/280;
+completeName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\eigval_lf_N5000.mat';
+save(completeName,'a_n_f');
+
+

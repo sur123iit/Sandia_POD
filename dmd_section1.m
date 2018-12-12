@@ -8,7 +8,11 @@ for r = 1:10
     completeName = strcat(folderName,fileName);
     uv1 = load(completeName);
     if r == 1
+<<<<<<< HEAD
         uv = uv1;
+=======
+        
+>>>>>>> 592d18bbc79e4f22b534c5c5390c518d2f122b69
     else
         uv = horzcat (uv,uv1);
     end
