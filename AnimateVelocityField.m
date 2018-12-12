@@ -31,7 +31,7 @@ open(v);
 for k = 2:386 %total 366
     UV1 = UV(:,k);
     [x1,y1,Uphi,Vphi] = cont_plot_uv( UV1 );
-    Phi_viz = Vphi/Uinf;
+    Phi_viz = Uphi/Uinf;
     contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
     caxis([-c_lim c_lim]);
     %c = colorbar;
