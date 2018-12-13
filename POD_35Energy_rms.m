@@ -104,7 +104,7 @@ uv_rms = sqrt(uv_rms1);
 %% Eigen Vector
 
 [x1,y1,Uphi,Vphi] = cont_plot_uv(uv_rms);
-Phi_viz = Uphi;
+Phi_viz = Vphi;
 l1 = abs(max(max(Phi_viz))); %Vphi or Uphi
 l2 = abs(min(min(Phi_viz))); %Vphi or Uphi
 l = max(l1,l2);

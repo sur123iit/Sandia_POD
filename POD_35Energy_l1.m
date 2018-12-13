@@ -63,8 +63,7 @@ uv_t_bar = horzcat(uv_rec,uv_rec2(:,193),uv_rec2(:,1:192));
 uvt_bar = uv_t_bar';
 uv_t = ifft(uvt_bar,'symmetric');
 uv2 = uv_t';
-save('Y:\rawdata\Sandia_cavity\uv_temp.txt','uv2','-ascii')
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\35Energy_37modes\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\35percentEnergy_1\';
 fileName = strcat('uv_rec_',int2str(ens_num),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'uv2','-ascii');
