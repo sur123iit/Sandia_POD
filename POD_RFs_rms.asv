@@ -1,13 +1,14 @@
 %%
-%This program plots RMS velocities for different techniques for 35% energy
+%This program plots RMS velocities for POD modes picked for rossiter
+%frequencies
 %%
 clear all;
-%%
+%% Load parameters for use
 [L,D,Ma,Uinf,Fs,N,Nb] = load_parameters(1);
-%% Frequency POD
-%%
+
+%% loading singular vectors
 load('Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi2_280.mat');
-%%
+%% loading singular values
 folderName = strcat('Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\');
 fileName = 'eigval_280.txt';
 completeName = strcat(folderName,fileName);
@@ -16,17 +17,23 @@ eig2 = eig1(:,1:193);
 eig2(:,1) = zeros(280,1);
 sum_eig4 = sum(sum(eig2));
 eig2 = eig2/sum_eig4;
-%%
+%% Reconstructing for RF3
+%Rossiter frequencies
 
-%First 37 modes
+m_lim = 1;
+%8:10 and 15:17 or 15:18
+%24:27 for RF3 for 1:5 captures about 60% of the energy and 1 captures 35%
+%energy
+f_lim = 24:27; % change this
+[a1 a2] = size(m_lim);
+[a3 a4] = size(f_lim);
+f_index_t = repmat(f_lim,a2,1);
+m_index_t = (repmat(m_lim,a4,1))';
+f_index = reshape(f_index_t,[a2*a4, 1]);
+m_index = reshape(m_index_t,[a2*a4, 1]);
+eig_2 = eig2(m_lim,f_lim);
+eig4 = reshape(eig_2,[a2*a4, 1]);
 
-eig3 = reshape(eig2,[280*193 ,1]);
-[eig5,index_eig] = sort(eig3,'descend');
-m_index = mod(index_eig,Nb);
-f_index = floor(index_eig/Nb) + 1;
-eig4 = eig5(1:37,1);
-m_index = m_index(1:37,1);
-f_index = f_index(1:37,1);
 %% POD Decreasing energy order 
 for ens_num = 1:Nb
 %clearvars -except Phi r
@@ -39,15 +46,15 @@ uvv = mean(uv,2);
 uv = uv - uvv;
 uv_bar = fft(uv');
 uv_bar1(:,:) = uv_bar(1:193,:);
-m_lim = 5;
+m_lim = 1;
 for m = 1:m_lim
     Phi1(:,:) = Phi2(:,m,:);
     a_n1 = (uv_bar1*Phi1); %193 x 193
     a_n(:,m) = diag(a_n1);
     %clearvars Phi1 a_n1;
 end
-a_n2 = zeros(193,5);
-for ii = 1:37
+a_n2 = zeros(193,1);
+for ii = 1:size(f_index)
     a_n2(f_index(ii),m_index(ii)) = a_n(f_index(ii),m_index(ii));
 end
 uv_rec = zeros(6360,N/2);
@@ -60,14 +67,13 @@ for ii = 1:m_lim
     uv_rec = uv_rec + (Phi1.*a_n1);
     clearvars Phi1 a_n1 a_n4 a_n3;
 end
-
 uv_rec2 = conj(flip(uv_rec,2));
 uv_t_bar = horzcat(uv_rec,uv_rec2(:,193),uv_rec2(:,1:192));
 uvt_bar = uv_t_bar';
 uv_t = ifft(uvt_bar,'symmetric');
 uv2 = uv_t';
-save('Y:\rawdata\Sandia_cavity\uv_temp.txt','uv2','-ascii')
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\35Energy_37modes\';
+save('Y:\rawdata\Sandia_cavity\uv_temp.txt','uv2','-ascii');
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode3\';
 fileName = strcat('uv_rec_',int2str(ens_num),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'uv2','-ascii');
