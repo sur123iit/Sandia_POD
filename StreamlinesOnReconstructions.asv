@@ -24,9 +24,7 @@ contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
 %c_lim = 54.8754/Uinf;
 %Vphi all frequencies
 %c_lim = 37.7095/Uinf;
-%c_lim = 0.15;
-c_lim = 0.08;
-%c_lim = 0.07;
+
 caxis([0 c_lim]);
 %c = colorbar;
 %c.LineWidth = 2;

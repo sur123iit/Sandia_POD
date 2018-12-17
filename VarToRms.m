@@ -1,6 +1,6 @@
 clear all;
 [L,D,Ma,Uinf,Fs,N,Nb] = load_parameters(1);
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode2\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\35percentEnergy_1\';
 fileName = 'uv_rec_var.txt';
 completeName = strcat(folderName,fileName);
 uv_var = load(completeName);
