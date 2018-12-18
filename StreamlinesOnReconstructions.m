@@ -18,27 +18,27 @@ UV1 = uv1 + uvm1;
 [x1,y1,Uphi,Vphi] = cont_plot_uv( UV1 );
 %%
 [x1,y1,Uphi,Vphi] = cont_plot_uv( uv_rms );
-Phi_viz = Vphi/Uinf;
+Phi_viz = Uphi/Uinf;
 contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
 %Uphi all frequencies
 %c_lim = 54.8754/Uinf;
 %Vphi all frequencies
 %c_lim = 37.7095/Uinf;
 %c_lim = 0.15;
-c_lim = 0.08;
+%c_lim = 0.08;
 %c_lim = 0.07;
-caxis([0 c_lim]);
+%caxis([0 c_lim]);
 %c = colorbar;
 %c.LineWidth = 2;
 colormap(jet(256))
 hold on
-x2 = x1(1:6:106);
-y2 = y1(3:3:30);
-Uphi2 = Uphi(1:6:106,3:3:30);
-Vphi2 = Vphi(1:6:106,3:3:30);
-[x3,y3] = meshgrid(x2,y2);
-s = streamline(x1/D,y1/D,Uphi',Vphi',x3/D,y3/D);
-set(s,'Color',[0.2 0.2 0.2],'LineWidth',1);
+%x2 = x1(1:6:106);
+%y2 = y1(3:3:30);
+%Uphi2 = Uphi(1:6:106,3:3:30);
+%Vphi2 = Vphi(1:6:106,3:3:30);
+%[x3,y3] = meshgrid(x2,y2);
+%s = streamline(x1/D,y1/D,Uphi',Vphi',x3/D,y3/D);
+%set(s,'Color',[0.2 0.2 0.2],'LineWidth',1);
 %{
 q = quiver(x2/D,y2/D,Uphi2',Vphi2');
 q.Color = [0 0 0];
