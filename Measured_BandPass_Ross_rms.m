@@ -28,11 +28,12 @@ fileName = strcat('uv_rec_',int2str(ens_num),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'uv2','-ascii');
 end
+%% Calculate Variance
 clear all;
 [L,D,Ma,Uinf,Fs,N,Nb] = load_parameters(1);
 uv_var = zeros(6360,Nb);
 for ens_num = 1:Nb
-folderName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\RossiterMode3\';
+folderName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\RossiterMode2\';
 fileName = strcat('uv_rec_',int2str(ens_num),'.txt');
 completeName = strcat(folderName, fileName);
 uv = load(completeName);
