@@ -1,4 +1,4 @@
-function [] = format_graph(n)
+function [] = format_graph(Phi)
 %UNTITLED15 Summary of this function goes here
 %   Detailed explanation goes here
 switch n
@@ -8,7 +8,11 @@ switch n
         lgd.FontSize = 18;
         set(gcf,'Position',[0 0 800 800])
     case 2
-        %pick l1 or l2 (larger of the two)
+        index_freq = 18;
+        [x1,y1,Uphi,Vphi] = cont_plot_uv(real(rx(:,index_freq)));
+        Phi_viz = Vphi;
+        contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
+        caxis([0 1]);%pick l1 or l2 (larger of the two)
         set(gca,'FontSize',20,'FontWeight','Bold','LineWidth',2);
         axis equal
         set(gcf,'Position',[0 0 1200 540])

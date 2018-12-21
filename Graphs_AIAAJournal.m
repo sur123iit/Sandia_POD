@@ -1,3 +1,17 @@
+%% FigA
+clear all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigA.mat');
+load(FigA.completeName);
+Rx_t = ifft_onesided(psd_fin);
+Rx = Rx_t';
+rx = Rx(:,FigA.index_t)./Rx(:,1);
+index_plot = 1;
+[x1,y1,Uphi,Vphi] = cont_plot_uv(rx(:,index_plot));
+Phi_viz = Vphi;
+contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none'); %Vphi or Uphi
+format_graph(2);
+caxis([0 1])   
 %% FigB
 clear all;
 load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigB.mat');
@@ -57,4 +71,23 @@ format_graph(1);
 xticks(FigDaxes.xtick1);
 yticks(FigDaxes.xtick1);
 xlim(FigDaxes.xlim), ylim(FigDaxes.xlim);
+%% FigE
+clear all;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigE.mat');
+uv_var = load(FigE.completeName);
+uv_rms = Var2Rms(uv_var);
+[x1,y1,Uphi,Vphi] = cont_plot_uv(uv_rms);
+index_uv = 2;
+if index_uv == 1
+    Phi_viz = Uphi/Uinf;
+else
+    Phi_viz = Vphi/Uinf;
+end
+contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none');
+format_graph(2);
+caxis(FigE.clim(index_uv,:));
+colormap(jet(256))
+
+
 

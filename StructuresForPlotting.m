@@ -1,3 +1,9 @@
+%% FigA1
+clear all;
+FigA.lname = '\Autocorrelation Coefficient';
+FigA.completeName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\Reconstruction_PSD\psd_avg.mat';
+FigA.index_t = [2 18];
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigA.mat','FigA');
 %% FigB
 clear all;
 FigB(1).lname = '\Delta t = 0.026 ms';
@@ -53,3 +59,9 @@ FigDaxes.count = 20;
 FigDaxes.xlabel = 'Snapshot POD mode number (\Delta t = 0.45 ms)';
 FigDaxes.ylabel = 'Classical POD mode number (averaged for 50 runs)';
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigDaxes.mat','FigDaxes');
+%% FigE
+FigE.lname = 'Rms velocity measured';
+FigE.completeName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach0.8\uv_rec_var.txt';
+FigE.clim = [0 0.2; 0 0.14];
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigE.mat','FigE');
+%% FigF
