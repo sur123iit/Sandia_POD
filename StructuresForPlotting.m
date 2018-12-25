@@ -65,3 +65,27 @@ FigE.completeName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mac
 FigE.clim = [0 0.2; 0 0.14];
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigE.mat','FigE');
 %% FigF
+FigF.lname = 'Eigenvalue convergence SPOD';
+FigF.completeName = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\eigval_ensN_5000.txt';
+FigF.pts = 1:1:100;
+FigF.mpts = [1 10:10:100];
+FigF.xtick1 = 20:20:100;
+FigF.ytick1 = 0:0.2:1;
+FigF.ylim1 = [0 1];
+FigF.xlabel1 = 'l';
+FigF.ylabel1 = '\eta_c_o_n_v';
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigF.mat','FigF');
+%% FigG
+FigG.lname = 'FPOD lambda vs f';
+FigG.completeName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\eigval_280.txt';
+FigG.pts = 2:46;
+FigG.xpts = (37500/386:37500/386:37500*45/386)*127*10^-3/280;
+FigG.xlim1 = [0.0441 2];
+FigG.ylim1 = [0 0.05];
+FigG.xlabel1 = 'St_L';
+FigG.ylabel1 = '\eta_l_,_f';
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigG.mat','FigG');
+%% FigH
+
+
+

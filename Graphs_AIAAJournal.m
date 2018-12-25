@@ -89,5 +89,23 @@ format_graph(2);
 caxis(FigE.clim(index_uv,:));
 colormap(jet(256))
 
+%% FigF: Eigenvalue convergence, Spatial POD
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigF.mat');
+eig1 = load(FigF.completeName);
+FigF
+
+eig2 = en_cnvr_ary(eig1);
+plot(FigF.pts,eig2(FigF.pts),'Color',[0 0 1],'LineWidth',2);
+hold on;
+plot(FigF.mpts,eig2(FigF.mpts),'o','MarkerEdgeColor',[0 0 1],'MarkerSize',8,'LineWidth',2);
+hold off;
+format_graph(1);
+xticks(FigF.xtick1);
+yticks(FigF.ytick1);
+xlabel(FigF.xlabel1);
+ylabel(FigF.ylabel1);
+ylim(FigF.ylim1);
+
 
 
