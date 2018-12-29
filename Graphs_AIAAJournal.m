@@ -88,6 +88,22 @@ contourf(x1/D,y1/D,Phi_viz',100,'LineStyle','none');
 format_graph(2);
 caxis(FigE.clim(index_uv,:));
 colormap(jet(256))
+%% FigE
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigE.mat');
+FigE
+
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+uv = load(FigE.completeName);
+
+%FigE1
+hold off;
+uv_rec = Var2Rms(uv);
+plot_cont_rms(uv_rec,1);
+
+%FigE2
+plot_cont_rms(uv_rec,2);
+
 
 %% FigF: Eigenvalue convergence, Spatial POD
 clear all;
@@ -106,6 +122,106 @@ yticks(FigF.ytick1);
 xlabel(FigF.xlabel1);
 ylabel(FigF.ylabel1);
 ylim(FigF.ylim1);
+%% FigG
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigG.mat');
+eig1 = load(FigG.completeName);
+FigG
+
+hold off;
+eig2 = eig1/sum(sum(eig1));
+plot(FigG.xpts,eig2(1,FigG.pts),'o-','LineWidth',2);
+hold on; 
+plot(FigG.xpts,eig2(2,FigG.pts),'s-','LineWidth',2);
+plot(FigG.xpts,eig2(3,FigG.pts),'o-','LineWidth',2);
+format_graph(1);
+xlim(FigG.xlim1), ylim(FigG.ylim1);
+xticks(FigG.xtick1), yticks(FigG.ytick1);
+for ros_ind = 1:4
+    plot([FigG.ross(ros_ind) FigG.ross(ros_ind)],FigG.ylim1,'--','Color',[0 0 0],'LineWidth',2)
+end
+xlabel(FigG.xlabel1,'FontSize',34,'FontWeight','Bold'), ylabel(FigG.ylabel1,'FontSize',34,'FontWeight','Bold')
+legend(FigG.legend1)
+%% FigH
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigH.mat');
+eig1 = load(FigH.completeName);
+FigH
+
+hold off;
+eig2 = eig1/sum(sum(eig1));
+eig3 = en_cnvr_ary(eig2(FigH.pts,FigH.findex(1))/sum(eig2(FigH.pts,FigH.findex(1))));
+plot(FigH.pts,eig3,'Color',[0 0 1],'LineWidth',2);
+hold on;
+eig4 = en_cnvr_ary(eig2(FigH.pts,FigH.findex(2))/sum(eig2(FigH.pts,FigH.findex(2))));
+plot(FigH.pts,eig4,'Color',[1 0 0],'LineWidth',2);
+eig5 = en_cnvr_ary(eig2(FigH.pts,FigH.findex(3))/sum(eig2(FigH.pts,FigH.findex(3))));
+plot(FigH.pts,eig5,'Color',[0 1 0],'LineWidth',2);
+
+plot(FigH.mpts,eig3(FigH.mpts),'o','MarkerEdgeColor',[0 0 1],'MarkerSize',8);
+plot(FigH.mpts,eig4(FigH.mpts),'s','MarkerEdgeColor',[1 0 0],'MarkerSize',8);
+plot(FigH.mpts,eig5(FigH.mpts),'^','MarkerEdgeColor',[0 1 0],'MarkerSize',8);
+xlim(FigH.xlim1), ylim(FigH.ylim1);
+format_graph(1);
+xticks(FigH.xtick1), yticks(FigH.ytick1);
+legend(FigH.legend1,'Location','East');
+xlabel(FigH.xlabel1,'FontSize',34,'FontWeight','Bold'), ylabel(FigH.ylabel1,'FontSize',34,'FontWeight','Bold')
+%% FigK
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigK.mat');
+FigK
+
+hold off;
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
+uv1 = load(FigK.completeName1);
+uv2 = load(FigK.completeName2);
+uv3 = load(FigK.completeName3);
+
+%FigK11
+uv_rec = Var2Rms(uv1);
+plot_cont_rms(uv_rec,1);
+
+
+%FigK12
+uv_rec = Var2Rms(uv1);
+plot_cont_rms(uv_rec,2);
+
+%FigK21
+uv_rec = Var2Rms(uv2);
+plot_cont_rms(uv_rec,1);
+
+%FigK22
+uv_rec = Var2Rms(uv2);
+plot_cont_rms(uv_rec,2);
+
+%FigK31
+uv_rec = Var2Rms(uv3);
+plot_cont_rms(uv_rec,1);
+
+%FigK32
+uv_rec = Var2Rms(uv3);
+plot_cont_rms(uv_rec,2);
+%% FigL
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigL.mat');
+FigL
+
+uv1 = load(FigL.completeName1);
+uv2 = load(FigL.completeName2);
+
+uv_rec = Var2Rms(uv1);
+plot_cont_rms(uv_rec,1);
+
+plot_cont_rms(uv_rec,2);
+
+uv_rec = Var2Rms(uv2);
+plot_cont_rms(uv_rec,1);
+
+plot_cont_rms(uv_rec,2);
+
+
+
+
 
 
 

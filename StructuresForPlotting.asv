@@ -62,6 +62,7 @@ save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigDaxes.mat','FigDa
 %% FigE
 FigE.lname = 'Rms velocity measured';
 FigE.completeName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach0.8\uv_rec_var.txt';
+FigE.clim = [0 0.2; 0 0.14];
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigE.mat','FigE');
 %% FigF
 FigF.lname = 'Eigenvalue convergence SPOD';
@@ -104,23 +105,14 @@ FigH.xtick1 = 10:10:50;
 FigH.ytick1 = 0:0.2:1;
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigH.mat','FigH');
 %% FigI
-FigI.lname = 'Spatial POD vs FPOD';
-FigI.completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\eigval_280.txt';
-FigI.completeName2 = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\eigval_lf_N5000.txt';
-save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigI.mat','FigI')
+FigI.lname = '';
+FigI.completeName = '';
 %% FigK
 FigK.lname = 'Rms SPOD energy levels';
-FigK.completeName1 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\35PercentEnergy_3\uv_rec_var.txt';
+FigK.completeName1 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\20PercentEnergy_1\uv_rec_var.txt';
 FigK.completeName2 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\50PercentEnergy_7\uv_rec_var.txt';
 FigK.completeName3 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\75PercentEnergy_31\uv_rec_var.txt';
-save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigK.mat','FigK');
-%% FigL
-FigL.lname = 'Rms FPOD energy levels';
-FigL.completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\35Energy_37modes\uv_rec_var.txt';
-FigL.completeName2 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\50Energy_146modes\uv_rec_var.txt';
-FigL.completeName3 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\75PercentEnergy_31\uv_rec_var.txt';
-save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigL.mat','FigL');
-
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigH.mat','FigH');
 
 
 

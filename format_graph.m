@@ -9,6 +9,7 @@ switch n
         set(gcf,'Position',[0 0 800 800])
     case 2
         %pick l1 or l2 (larger of the two)
+        hold on;
         set(gca,'FontSize',20,'FontWeight','Bold','LineWidth',2);
         axis equal
         set(gcf,'Position',[0 0 1200 540])
@@ -17,9 +18,8 @@ switch n
         xticks(0:1:5), yticks(-1:1:1)
         line([-0.1 0 0 0 0 5 5 5 5 5.1],[0 0 -1 0 -1 -1 -1 0 0 0],'Color',[0 0 0],'LineWidth',2)
         hold off
-        pbaspect([5.4 2.2 1]);
     case 3
-        disp('positive one')
+        disp('case 3');
     otherwise
         disp('other value')
 end
