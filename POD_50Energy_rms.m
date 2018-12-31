@@ -4,7 +4,7 @@ clear all;
 [L,D,Ma,Uinf,Fs,N,Nb] = load_parameters(1);
 %% Frequency POD
 %%
-load('Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi2_280.mat');
+load('Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi3_280.mat');
 %%
 folderName = strcat('Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\');
 fileName = 'eigval_280.txt';
@@ -15,9 +15,7 @@ eig2(:,1) = zeros(280,1);
 sum_eig4 = sum(sum(eig2));
 eig2 = eig2/sum_eig4;
 %%
-
 %First 146 modes
-
 eig3 = reshape(eig2,[280*193 ,1]);
 [eig5,index_eig] = sort(eig3,'descend');
 m_index = mod(index_eig,Nb);
@@ -39,19 +37,19 @@ uv_bar = fft(uv');
 uv_bar1(:,:) = uv_bar(1:193,:);
 m_lim = 10;
 for m = 1:m_lim
-    Phi1(:,:) = Phi2(:,m,:);
+    Phi1(:,:) = Phi3(:,m,:);
     a_n1 = (uv_bar1*Phi1); %193 x 193
     a_n(:,m) = diag(a_n1);
     %clearvars Phi1 a_n1;
 end
 a_n2 = zeros(193,5);
-for ii = 1:37
+for ii = 1:146
     a_n2(f_index(ii),m_index(ii)) = a_n(f_index(ii),m_index(ii));
 end
 uv_rec = zeros(6360,N/2);
 clear a_n1;
 for ii = 1:m_lim
-    Phi1(:,:) = Phi2(:,ii,:);
+    Phi1(:,:) = Phi3(:,ii,:);
     a_n4 = a_n2(:,ii);
     a_n3 = a_n4';
     a_n1 = repmat(a_n3,6360,1);
@@ -77,7 +75,7 @@ clear all;
 [L,D,Ma,Uinf,Fs,N,Nb] = load_parameters(1);
 uv_var = zeros(6360,Nb);
 for ens_num = 1:Nb
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\35Energy_37modes\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\50Energy_146modes\';
 fileName = strcat('uv_rec_',int2str(ens_num),'.txt');
 completeName = strcat(folderName, fileName);
 uv = load(completeName);
