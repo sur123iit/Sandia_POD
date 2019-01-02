@@ -34,6 +34,5 @@ else
     g = [g; 1; flipud(g)];
     b = flipud(r);
 end
-
 c = [r g b]; 
 

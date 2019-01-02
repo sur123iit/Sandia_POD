@@ -18,12 +18,12 @@ function c = blackwhite_wide(m)
 if nargin < 1, m = size(get(gcf,'colormap'),1); end
 
 if (mod(m,2) == 0)
-    % From [0 0 1] to [1 1 1], then [1 1 1] to [1 0 0];
+    % From [1 1 1] to [1 1 1], then [1 1 1] to [1 0 0];
     m1 = m;
     r1 = (1:m1-1)'/(max(m1-1,1));
-    r = [1; 0.85*(ones(m1-1,1)-r1)];
-    g = [1; 0.85*(ones(m1-1,1)-r1)];
-    b = [1; 0.85*(ones(m1-1,1)-r1)];
+    r = [1; 0.85*(ones(m1-1,1)-r1); ];
+    g = [1; 0.85*(ones(m1-1,1)-r1); ];
+    b = [1; 0.85*(ones(m1-1,1)-r1); ];
 else
     % From [0 0 1] to [1 1 1] to [1 0 0];
     %m1 = floor(m*0.5);
@@ -39,6 +39,5 @@ else
     %g = [g; 1; flipud(g)];
     %b = flipud(r);
 end
-
 c = [r g b]; 
 
