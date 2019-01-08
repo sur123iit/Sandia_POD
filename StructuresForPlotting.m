@@ -107,6 +107,15 @@ save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigH.mat','FigH');
 FigI.lname = 'Spatial POD vs FPOD';
 FigI.completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\eigval_280.txt';
 FigI.completeName2 = 'Y:\rawdata\Sandia_cavity\ConvergenceResults\eigval_lf_N5000.txt';
+FigI.pts = 1:150;
+FigI.mpts = [1 10:10:150];
+FigI.xtick1 = 30:30:150;
+FigI.ytick1 = 0:0.1:0.6;
+FigI.ylim1 = [0 0.6];
+FigI.xlim1 = [1 150];
+FigI.legend1 = {'FPOD','SPOD'};
+FigI.xlabel1 = 'Modes (l,f)';
+FigI.ylabel1 = '\eta';
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigI.mat','FigI')
 %% FigK
 FigK.lname = 'Rms SPOD energy levels';
@@ -120,8 +129,23 @@ FigL.completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\D
 FigL.completeName2 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\50Energy_146modes\uv_rec_var.txt';
 FigL.completeName3 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\75PercentEnergy_31\uv_rec_var.txt';
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigL.mat','FigL');
-
-
+%% FigM
+FigM.lname = 'Rms FPOD Rossiter modes';
+FigM.completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode1\uv_rec_var.txt' ;
+FigM.completeName2 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode2\uv_rec_var.txt';
+FigM.completeName3 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode3\uv_rec_var.txt';
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigM.mat','FigM');
+%% FigN
+FigN.lname = 'Rms Bandpass RF measured';
+FigN.completeName1 = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\RossiterMode1\uv_rec_var.txt';
+FigN.completeName2 = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\RossiterMode2\uv_rec_var.txt';
+FigN.completeName3 = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\RossiterMode3\uv_rec_var.txt';
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigN.mat','FigN');
+%% FigT
+FigT.lname = 'Gridplot l f';
+FigT.completeName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\eigval_280.txt';
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigT.mat','FigT');
+%%
 
 
 

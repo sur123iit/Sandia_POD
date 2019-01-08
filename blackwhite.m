@@ -13,8 +13,6 @@ function c = blackwhite(m)
 %   See also HSV, GRAY, HOT, BONE, COPPER, PINK, FLAG, 
 %   COLORMAP, RGBPLOT.
 
-%   Adam Auton, 9th October 2009
-
 if nargin < 1, m = size(get(gcf,'colormap'),1); end
 
 if (mod(m,2) == 0)
@@ -39,6 +37,5 @@ else
     %g = [g; 1; flipud(g)];
     %b = flipud(r);
 end
-
 c = [r g b]; 
 

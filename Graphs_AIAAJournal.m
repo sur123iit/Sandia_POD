@@ -166,11 +166,36 @@ format_graph(1);
 xticks(FigH.xtick1), yticks(FigH.ytick1);
 legend(FigH.legend1,'Location','East');
 xlabel(FigH.xlabel1,'FontSize',34,'FontWeight','Bold'), ylabel(FigH.ylabel1,'FontSize',34,'FontWeight','Bold')
+%% FigI
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigI.mat');
+FigI
+
+eig1 = load(FigI.completeName1);
+eig2 = load(FigI.completeName2);
+eig2 = eig2';
+
+[eigD1, m_ind1, f_ind1] = DecEn_eigval(eig1);
+[eigD2, m_ind2, f_ind2] = DecEn_eigval(eig2);
+eigDA = en_cnvr_ary(eigD1);
+eigDB = en_cnvr_ary(eigD2);
+
+plot(FigI.pts, eigDA(FigI.pts),'Color',[0 0 1],'LineWidth',2);
+hold on;
+plot(FigI.pts, eigDB(FigI.pts),'Color',[1 0 0],'LineWidth',2);
+plot(FigI.mpts,eigDA(FigI.mpts),'o', 'MarkerEdgeColor',[0 0 1], 'MarkerSize',8);
+plot(FigI.mpts,eigDB(FigI.mpts), 's','MarkerEdgeColor',[1 0 0], 'MarkerSize',8);
+legend(FigI.legend1)
+format_graph(1);
+hold off;
+xticks(FigI.xtick1), yticks(FigI.ytick1)
+xlabel(FigI.xlabel1,'FontSize',34,'FontWeight','Bold') 
+ylabel(FigI.ylabel1,'FontSize',34,'FontWeight','Bold')
+
 %% FigK
 clear all;
 load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigK.mat');
 FigK
-
 hold off;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 uv1 = load(FigK.completeName1);
@@ -217,6 +242,65 @@ plot_cont_rms(uv_rec,2);
 uv_rec = Var2Rms(uv2);
 plot_cont_rms(uv_rec,1);
 
+plot_cont_rms(uv_rec,2);
+%% FigM
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigM.mat');
+FigM
+
+uv1 = load(FigM.completeName1);
+uv2 = load(FigM.completeName2);
+uv3 = load(FigM.completeName3);
+
+%Ross1 U
+uv_rec = Var2Rms(uv1);
+plot_cont_rms(uv_rec,1);
+
+%Ross1 V
+plot_cont_rms(uv_rec,2);
+
+%Ross2 U
+uv_rec = Var2Rms(uv2);
+plot_cont_rms(uv_rec,1);
+
+%Ross2 V
+plot_cont_rms(uv_rec,2);
+
+%Ross3 U
+uv_rec = Var2Rms(uv3);
+plot_cont_rms(uv_rec,1);
+
+%Ross3 V
+plot_cont_rms(uv_rec,2);
+
+%% FigN
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigN.mat');
+FigN
+
+uv1 = load(FigN.completeName1);
+uv2 = load(FigN.completeName2);
+uv3 = load(FigN.completeName3);
+
+%Ross1 U
+uv_rec = Var2Rms(uv1);
+plot_cont_rms(uv_rec,1);
+
+%Ross1 V
+plot_cont_rms(uv_rec,2);
+
+%Ross2 U
+uv_rec = Var2Rms(uv2);
+plot_cont_rms(uv_rec,1);
+
+%Ross2 V
+plot_cont_rms(uv_rec,2);
+
+%Ross3 U
+uv_rec = Var2Rms(uv3);
+plot_cont_rms(uv_rec,1);
+
+%Ross3 V
 plot_cont_rms(uv_rec,2);
 
 
