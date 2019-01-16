@@ -1,8 +1,0 @@
-%% DMD for multiple runs
-clear all;
-%%
-r = 50;
-for ens_num = 1:10
-    
-    
-end

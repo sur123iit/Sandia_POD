@@ -54,7 +54,7 @@ dmd_modes = Qx*dmd_vec;
 
 N = 1; 
 A_rec = dmd_modes*(dmd_evals1^N)*pinv(dmd_modes);
-Y_rec = A_rec*x;
+Y_rec = A_rec*uv(:,1);
 Y_rec1 = real(Y_rec);
 
 % UV matrix for reconstruction
