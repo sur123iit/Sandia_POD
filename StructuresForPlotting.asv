@@ -155,9 +155,6 @@ FigP.completeName3 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\M
 FigP.completeName4 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode4\uv_rec_var.txt';
 FigP.completeName5 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode5\uv_rec_var.txt';
 FigP.completeName6 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode6\uv_rec_var.txt';
-FigP.completeName7 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode7\uv_rec_var.txt';
-FigP.completeName8 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode8\uv_rec_var.txt';
-FigP.completeName9 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode9\uv_rec_var.txt';
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigP.mat','FigP');
 %% FigT
 FigT.lname = 'Gridplot l f';
