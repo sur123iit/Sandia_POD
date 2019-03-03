@@ -141,6 +141,24 @@ FigN.completeName1 = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Ro
 FigN.completeName2 = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\RossiterMode2\uv_rec_var.txt';
 FigN.completeName3 = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\RossiterMode3\uv_rec_var.txt';
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigN.mat','FigN');
+%% FigO
+FigO.lname = 'Rms Spatial POD Modewise';
+FigO.completeName1 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\20PercentEnergy_1\uv_rec_var.txt';
+FigO.completeName2 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\Mode2\uv_rec_var.txt';
+FigO.completeName3 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\Mode3\uv_rec_var.txt';
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigO.mat','FigO');
+%% FigP
+FigP.lname = 'Rms Frequency POD Modewise';
+FigP.completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode1\uv_rec_var.txt';
+FigP.completeName2 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode2\uv_rec_var.txt';
+FigP.completeName3 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode3\uv_rec_var.txt';
+FigP.completeName4 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode4\uv_rec_var.txt';
+FigP.completeName5 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode5\uv_rec_var.txt';
+FigP.completeName6 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode6\uv_rec_var.txt';
+FigP.completeName7 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode7\uv_rec_var.txt';
+FigP.completeName8 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode8\uv_rec_var.txt';
+FigP.completeName9 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\Mode9\uv_rec_var.txt';
+save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigP.mat','FigP');
 %% FigT
 FigT.lname = 'Gridplot l f';
 FigT.completeName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\eigval_280.txt';

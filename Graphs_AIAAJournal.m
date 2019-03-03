@@ -302,6 +302,36 @@ plot_cont_rms(uv_rec,1);
 
 %Ross3 V
 plot_cont_rms(uv_rec,2);
+%%
+clear all;
+load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigO.mat');
+FigO
+
+uv1 = load(FigO.completeName1);
+uv2 = load(FigO.completeName2);
+uv3 = load(FigO.completeName3);
+
+%Mode1 U
+uv_rec = Var2Rms(uv1);
+plot_cont_rms(uv_rec,1);
+
+%Mode1 V
+plot_cont_rms(uv_rec,2);
+
+%Mode2 U
+uv_rec = Var2Rms(uv2);
+plot_cont_rms(uv_rec,1);
+
+%Mode2 V
+plot_cont_rms(uv_rec,2);
+
+%Mode3 U
+uv_rec = Var2Rms(uv3);
+plot_cont_rms(uv_rec,1);
+
+%Mode3 V
+plot_cont_rms(uv_rec,2);
+%%
 
 
 
