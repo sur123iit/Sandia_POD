@@ -151,10 +151,10 @@ FigO.completeName31 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\7
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigO.mat','FigO');
 %% FigJ
 FigJ.lname = 'Rms Frequency POD Modewise';
-FigJ.completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\20Energy_8modes\uv_rec_var.txt';
-FigJ.completeName2 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\35Energy_37modes\uv_rec_var.txt';
-FigJ.completeName3 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\50Energy_146modes\uv_rec_var.txt';
-FigJ.completeName4 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\75Energy_modes\uv_rec_var.txt';
+FigJ.completeName9 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\20Energy_9modes\uv_rec_var.txt';
+FigJ.completeName37 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\35Energy_37modes\uv_rec_var.txt';
+FigJ.completeName146 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\50Energy_146modes\uv_rec_var.txt';
+FigJ.completeName599 = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\DecreasingEnergy\65Energy_599modes\uv_rec_var.txt';
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigJ.mat','FigJ');
 %% FigT
 FigT.lname = 'Gridplot l f';

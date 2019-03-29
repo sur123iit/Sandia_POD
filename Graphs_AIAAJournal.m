@@ -348,19 +348,45 @@ plot_cont_rms(uv_rec,1);
 plot_cont_rms(uv_rec,2);
 
 %%
-%%
-FigJ
+%% FigJ
 clear all;
 load('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigJ.mat');
 FigJ
 
-uv1 = load(FigJ.completeName1);
-uv2 = load(FigJ.completeName2);
-uv3 = load(FigJ.completeName3);
-uv4 = load(FigJ.completeName4);
-uv5 = load(FigJ.completeName5);
-uv6 = load(FigJ.completeName6);
+uv9 = load(FigJ.completeName9);
+uv37 = load(FigJ.completeName37);
+uv146 = load(FigJ.completeName146);
+uv599 = load(FigJ.completeName599);
 
+% Mode 9 U
+uv_rec = Var2Rms(uv9);
+plot_cont_rms(uv_rec,1);
+
+% Mode 8 V
+plot_cont_rms(uv_rec,2);
+
+% Mode 37 U
+uv_rec = Var2Rms(uv37);
+plot_cont_rms(uv_rec,1);
+
+% Mode 37 V
+plot_cont_rms(uv_rec,2);
+
+% Mode 146 U
+uv_rec = Var2Rms(uv146);
+plot_cont_rms(uv_rec,1);
+
+% Mode 146 V
+plot_cont_rms(uv_rec,2);
+
+% Mode 599 U
+uv_rec = Var2Rms(uv599);
+plot_cont_rms(uv_rec,1);
+
+% Mode 599 V
+plot_cont_rms(uv_rec,2);
+
+%%
 
 
 

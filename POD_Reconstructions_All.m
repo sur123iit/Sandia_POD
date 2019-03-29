@@ -51,6 +51,18 @@ f_index = floor(index_eig/Nb) + 1;
 eig4 = eig5(1:50,1);
 m_index = m_index(1:50,1);
 f_index = f_index(1:50,1);
+
+%First 8 modes
+
+eig3 = reshape(eig2,[280*193 ,1]);
+[eig5,index_eig] = sort(eig3,'descend');
+m_index = mod(index_eig,Nb);
+f_index = floor(index_eig/Nb) + 1;
+eig4 = eig5(1:8,1);
+m_index = m_index(1:8,1);
+f_index = f_index(1:8,1);
+
+
 %First 50 modes with reduced frequency
 eig2(:,2) = zeros(280,1);
 eig2(:,3) = zeros(280,1);
