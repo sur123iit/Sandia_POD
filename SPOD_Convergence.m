@@ -1,7 +1,7 @@
 %%
 clear all;
 %% Loading flow parameters
-[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(2);
+[L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(3);
 %% Loading Data for Spectral POD based on runs
 %Define the type of convergence
 for r = 10:10:Nb
@@ -10,6 +10,8 @@ for ens_num = r-9:r
     fileName = strcat('ens_num_',int2str(ens_num),'.txt');
     completeName = strcat(folderName,fileName);
     uv = load(completeName);
+    uv_m = mean(uv,2);
+    uv = uv - uv_m;
     qj_bar = fft(uv');
     clear uv;
     qj_bar_t = qj_bar';
@@ -30,7 +32,7 @@ clearvars POD_spect_inst;
 clearvars qj_mat qj_bar_inst;
 end
 %% Save data
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults_Mach0.6\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults_Mach0.94\';
 fileName = strcat('eigval_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'eigen_val','-ascii');

@@ -24,7 +24,7 @@ elseif proj_num == 2
     N = 386;
     Nb = 260;
     Fs = 37500;
-elseif proj_num == 2
+elseif proj_num == 3
     L = 127*10^-3;
     D = 25.4*10^-3;
     Ma = 0.94;

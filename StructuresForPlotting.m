@@ -147,6 +147,7 @@ FigO.completeName1 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\20
 FigO.completeName2 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\Mode2\uv_rec_var.txt';
 FigO.completeName3 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\Mode3\uv_rec_var.txt';
 FigO.completeName7 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\50PercentEnergy_7\uv_rec_var.txt';
+FigO.completeName16 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\65PercentEnergy_16\uv_rec_var.txt';
 FigO.completeName31 = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\75PercentEnergy_31\uv_rec_var.txt';
 save('Y:\rawdata\Sandia_cavity\StructuresToPlot_AIAAJournal\FigO.mat','FigO');
 %% FigJ

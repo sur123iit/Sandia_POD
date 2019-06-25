@@ -5,7 +5,7 @@ clear all;
 %Spectral ensembled data is called
 folderName = strcat('Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach',num2str(Ma),'\');
 %% Data collection
-for ens_num = 151:160
+for ens_num = 51:100
     fileName = strcat('ens_num_',int2str(ens_num),'.txt');
     completeName = strcat(folderName,fileName);
     uv = load(completeName);
@@ -21,16 +21,54 @@ for ens_num = 151:160
         y = cat(2,y,y1);
     end
 end
+
+r = 40;
+[ ~, dmd_vec, dmd_evals,dmd_modes,mode_frequencies ] = std_dmd(x,y,r,Fs);
+% Organize positive frequency modes in increasing oreder
+[dmd_freq1,dmd_eval1,dmd_mode1] = sort_dmd(mode_frequencies,dmd_evals,dmd_modes);
+dmd_freq = dmd_freq1(21:40,1);
+dmd_eval = dmd_eval1(21:40,1);
+dmd_mode = dmd_mode1(:,21:40);
+saveFolder = 'Y:\rawdata\Sandia_cavity\DMD\Convergence\Rank40\';
+saveFile = strcat('freq_',int2str(ens_num),'.txt');
+saveComplete = strcat(saveFolder,saveFile);
+save(saveComplete,'dmd_freq','-ascii');
+saveFile = strcat('eigval_',int2str(ens_num),'.mat');
+saveComplete = strcat(saveFolder,saveFile);
+save(saveComplete,'dmd_eval');
+saveFile = strcat('Phi_',int2str(ens_num),'.mat');
+saveComplete = strcat(saveFolder,saveFile);
+save(saveComplete,'dmd_mode');
+
+r = 15;
+[ ~, dmd_vec, dmd_evals,dmd_modes,mode_frequencies ] = std_dmd(x,y,r,Fs);
+% Organize positive frequency modes in increasing oreder
+[dmd_freq1,dmd_eval1,dmd_mode1] = sort_dmd(mode_frequencies,dmd_evals,dmd_modes);
+dmd_freq = dmd_freq1(8:15,1);
+dmd_eval = dmd_eval1(8:15,1);
+dmd_mode = dmd_mode1(:,8:15);
+saveFolder = 'Y:\rawdata\Sandia_cavity\DMD\Convergence\Rank15\';
+saveFile = strcat('freq_',int2str(ens_num),'.txt');
+saveComplete = strcat(saveFolder,saveFile);
+save(saveComplete,'dmd_freq','-ascii');
+saveFile = strcat('eigval_',int2str(ens_num),'.mat');
+saveComplete = strcat(saveFolder,saveFile);
+save(saveComplete,'dmd_eval');
+saveFile = strcat('Phi_',int2str(ens_num),'.mat');
+saveComplete = strcat(saveFolder,saveFile);
+save(saveComplete,'dmd_mode');
+
+%%
 % Rank 50
-r = 50;
+r = 25;
 [ ~, dmd_vec, dmd_evals,dmd_modes,mode_frequencies ] = std_dmd(x,y,r,Fs);
 % Organize positive frequency modes in increasing oreder
 [dmd_freq1,dmd_eval1,dmd_mode1] = sort_dmd(mode_frequencies,dmd_evals,dmd_modes);
 %
 %%%%
-dmd_freq = dmd_freq1(26:50,1);
-dmd_eval = dmd_eval1(26:50,1);
-dmd_mode = dmd_mode1(:,26:50);
+dmd_freq = dmd_freq1(13:25,1);
+dmd_eval = dmd_eval1(13:25,1);
+dmd_mode = dmd_mode1(:,13:25);
 %%%%
 % Save modes
 %%%%%
