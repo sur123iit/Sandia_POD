@@ -204,4 +204,10 @@ clear Phi
 %%
 save('Y:\rawdata\Sandia_cavity\Phi_contLvar.mat','Phi_cont');
 %%
+clear all;
+completeName1 = 'Y:\rawdata\Sandia_cavity\SpectralConvergenceResults\Phi_280.mat';
+load(completeName1);
+Phi_RF2 = Phi(:,1:8,16);
+clear Phi
+save('Y:\rawdata\Sandia_cavity\Phi_RF2.mat','Phi_RF2');
 
