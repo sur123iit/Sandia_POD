@@ -1,6 +1,0 @@
-%%
-clear all;
-load('Y:\rawdata\Sandia_cavity\uv_matEMD.mat');
-%%
-C_mat = uv_mt'*uv_mt;
-POD_Snapshot(

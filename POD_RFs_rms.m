@@ -20,13 +20,13 @@ eig2 = eig2/sum_eig4;
 %% Reconstructing for RF3
 %Rossiter frequencies
 
-m_lim = 1;
+m_lim = 3;
 %6:9 for RF1 1st mode captures 33 % of the energy 1:4 or 1:5 captures about
 %60% of the energy
 %15:17 or 15:18 for RF3 1st mode captures 60% of the energy
 %24:27 for RF3 for 1:5 captures about 60% of the energy and 1 captures 35%
 %energy
-f_lim = 6:9; % change this
+f_lim = 16; % change this
 [a1 a2] = size(m_lim);
 [a3 a4] = size(f_lim);
 f_index_t = repmat(f_lim,a2,1);
@@ -37,7 +37,7 @@ eig_2 = eig2(m_lim,f_lim);
 eig4 = reshape(eig_2,[a2*a4, 1]);
 
 %% POD Reconstruction
-for ens_num = 1:Nb
+for ens_num = 6:6
 %clearvars -except Phi r
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
 folderName = 'Y:\rawdata\Sandia_cavity\Spectral velocity data\vel_ens\Mach0.8\';
@@ -48,7 +48,7 @@ uvv = mean(uv,2);
 uv = uv - uvv;
 uv_bar = fft(uv');
 uv_bar1(:,:) = uv_bar(1:193,:);
-m_lim = 1;
+m_lim = 3;
 for m = 1:m_lim
     Phi1(:,:) = Phi2(:,m,:);
     a_n1 = (uv_bar1*Phi1); %193 x 193
@@ -74,8 +74,8 @@ uv_t_bar = horzcat(uv_rec,uv_rec2(:,193),uv_rec2(:,1:192));
 uvt_bar = uv_t_bar';
 uv_t = ifft(uvt_bar,'symmetric');
 uv2 = uv_t';
-folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode1\';
-fileName = strcat('uv_rec_',int2str(ens_num),'.txt');
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode2\';
+fileName = strcat('uv_rec3_',int2str(ens_num),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'uv2','-ascii');
 end

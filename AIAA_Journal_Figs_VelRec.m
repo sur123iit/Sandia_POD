@@ -1,19 +1,16 @@
 %%
 clear all;
 r = 6;
-folderName = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\35PercentEnergy_3\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpectralVelocityReconstructions\RossiterModes\RossiterMode3\';
 fileName = strcat('uv_rec_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 uv = load(completeName);
-folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_mean\Mach0.8\';
-fileName = strcat('vel_mean.txt');
-completeName = strcat(folderName,fileName);
-uvm = load(completeName);
-uvm1 = uvm(:,r);
+uv_m = mean(uv,2);
+uv = uv - uv_m;
 [L,D,Mach,Uinf,Fs,N,Nb] = load_parameters(1);
-c_lim = 0.26;
+c_lim = 0.05;
 %%
-k = 58;
+k = 66+16;
 uv1 = uv(:,k);
 UV1 = uv1;
 %UV1 = uv1 + uvm1;
