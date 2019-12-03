@@ -28,7 +28,7 @@ eigen_val(:,f) = diag(eigval);
 POD_spect_inst = eigvec*1/sqrt(eigval);
 clearvars eigvec eigval;
 Phi(:,:,f) = POD_spect_inst;
-clearvars POD_spect_inst;4
+clearvars POD_spect_inst;
 clearvars qj_mat qj_bar_inst;
 end
 %% Save data
