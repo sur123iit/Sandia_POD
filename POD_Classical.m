@@ -48,6 +48,3 @@ save('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\Phi_clasN_19300.txt','
 %%
 Phi1 = load('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\Phi_trN_5000.txt');
 Phi2 = load('Y:\rawdata\Sandia_cavity\ConvergenceResults\Mach0.8\Phi_ensN_5000.txt');
-%%
-
-
