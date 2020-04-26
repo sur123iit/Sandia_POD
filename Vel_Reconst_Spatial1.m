@@ -13,7 +13,7 @@ folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_ens\Mach0.8\';
 fileName = strcat('ens_num_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 uv = load(completeName);
-m_lim = 3;
+m_lim = 16;
 for m = 1:m_lim
     Phi1(:,1) = Phi(:,m);
     a_n1 = (uv'*Phi1);
@@ -28,7 +28,7 @@ for m = 1:m_lim
     uv_rec = uv_rec + (Phi1*a_n3);
     clearvars Phi1 a_n1 a_n2 a_n3;
 end
-folderName = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\35PercentEnergy_3\';
+folderName = 'Y:\rawdata\Sandia_cavity\SpatialVelocityReconstructions\65PercentEnergy_16\';
 fileName = strcat('uv_rec_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 save(completeName,'uv_rec','-ascii');
