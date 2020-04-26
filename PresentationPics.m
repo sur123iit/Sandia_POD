@@ -52,6 +52,17 @@ set(0,'DefaultLineLineWidth',6);
 %set(hline,'LineWidth',5);
 %%
 figure();
+plotcube([-12.7 76.2 25.4],[0 0 0],0.9,[0.8 0.8 0.8]);
+plotcube([76.2 76.2 12.7],[0 0 0],0.9,[0.8 0.8 0.8]);
+plotcube([101.6 76.2 25.4],[76.2 0 0],0.9,[0.8 0.8 0.8]);
+axis equal
+set(0,'DefaultLineLineWidth',6);
+%% Kulite locations
+line([-0.1 0 0 0 0 6 6 6 6 6.1],[0 0 -1 0 -1 -1 -1 0 0 0],'Color',[0 0 0],'LineWidth',2);
+set(gca,'FontSize',24,'FontWeight','Bold','LineWidth',2);
+axis equal
+%%
+figure();
 plotcube([10 10 10],[0 0 0],0.9,[0.9 0.9 0.95])
 plotcube([10 10 10],[10 0 0],0.9,[0.9 0.9 0.95])
 figure();

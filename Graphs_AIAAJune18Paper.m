@@ -172,10 +172,10 @@ load('Y:\rawdata\Sandia_cavity\Cont_plot_SPOD_AIAA.mat');
 index_freq = 9;
 index_mode = 3;
 [x1,y1,Uphi,Vphi] = cont_plot_uv(real(cont_plot_mat(:,index_mode,index_freq)));
-l1 = abs(max(max(Uphi))); %Vphi or Uphi
-l2 = abs(min(min(Uphi))); %Vphi or Uphi
+l1 = abs(max(max(Vphi))); %Vphi or Uphi
+l2 = abs(min(min(Vphi))); %Vphi or Uphi
 l = max(l1,l2);
-contourf(x1/D,y1/D,Uphi',100,'LineStyle','none'); %Vphi or Uphi
+contourf(x1/D,y1/D,Vphi',100,'LineStyle','none'); %Vphi or Uphi
 caxis([-l l]);%pick l1 or l2 (larger of the two)
 colormap(redblue)
  % depending on location

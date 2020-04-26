@@ -59,11 +59,11 @@ hold off
 %% Reconstruction Spect and Spatial instantaneous
 clear all;
 r = 6;
-folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_ens\Mach0.8\';
+folderName = 'X:\Data - Surabhi\Sandia_cavity\Denoise velocity data\vel_ens\Mach0.8\';
 fileName = strcat('ens_num_',int2str(r),'.txt');
 completeName = strcat(folderName,fileName);
 uv = load(completeName);
-folderName = 'Y:\rawdata\Sandia_cavity\Denoise velocity data\vel_mean\Mach0.8\';
+folderName = 'X:\Data - Surabhi\Sandia_cavity\Denoise velocity data\vel_mean\Mach0.8\';
 fileName = strcat('vel_mean.txt');
 completeName = strcat(folderName,fileName);
 uvm = load(completeName);
